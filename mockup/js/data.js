@@ -25,21 +25,14 @@ data = new Object();
     function get_pisos(){
         var pisos = [], regiones=[], caminos=[];
         //conseguir los pisos asociados a el recinto
+        
         $.post( "php/niveles_recinto.php", { recinto: data.nombre_recinto }, function(floor){
             pisos = JSON.parse(floor);
-            console.log(pisos);
             for(index in pisos){
-                console.log("pisos: ");
-                console.log(pisos);
-                console.log("index: ");
-                console.log(index);
-                console.log("pisos[index]: ");
-                console.log(pisos[index]);
-                //console.log("piso: " + data.pisos[index]["NroNivel"]);
-                $.post( "php/regiones_nivel.php", { recinto: data.nombre_recinto, nivel: pisos[index]["NroNivel"] }, function(figure){
+                piso = pisos[index]["NroNivel"];
+                $.post( "php/regiones_nivel.php", { recinto: data.nombre_recinto, nivel: piso }, function(figure){
                     regiones = JSON.parse(figure);
-                    console.log();
-                    $.post( "php/caminos_nivel.php", { recinto: data.nombre_recinto, nivel: pisos[index]["NroNivel"] }, function(path){
+                    $.post( "php/caminos_nivel.php", { recinto: data.nombre_recinto, nivel: piso }, function(path){
                         caminos = JSON.parse(path);
                         var reg = [], cam = [];
                         for(index_reg in regiones){
@@ -48,10 +41,11 @@ data = new Object();
                         for(index_cam in caminos){
                             cam.push(caminos[index_cam]["StringPath"]);
                         }
-                        data.svg.pisos.push({"nivel": pisos[index]["NroNivel"], "regiones":reg, "caminos":cam});
+                        data.svg.pisos.push({"nivel": piso, "regiones":reg, "caminos":cam});
                     });
                 });
             }  
+            data.pisos = pisos;
         });
     }
 
@@ -115,4 +109,7 @@ data = new Object();
         get_posiciones();
         get_adyacentes();
     }
-    get_data("Universidad1");
+    $(function(){
+        get_data("Universidad1");    
+    });
+    
