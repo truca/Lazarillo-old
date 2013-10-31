@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html ng-app lang="es">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">
+		<link rel="stylesheet" type="text/css" href="css/custom.css">
+
+		<script type="text/javascript" src="js/jquery-2.0.2.min.js"></script>
+		<script type="text/javascript" src="js/async.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/underscore-min.js"></script>
+		<script type="text/javascript" src="js/raphael.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/mapa.js"></script>
+		<script type="text/javascript" src="js/scriptcaminos.js"></script>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/data.js"></script>
+		<script type="text/javascript" src="js/FMController.js"></script>
+		<script type="text/javascript">
+			function cambiarBarra(){
+				$(".barrita").toggleClass("invisible");	
+			}
+			function activarPantalla(pantalla){
+				$(".center").addClass("invisible");
+				$("."+pantalla).removeClass("invisible");
+			}
+		</script>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="container">
+				<div class="center-container" ng-controller="RutasCtrl">
+					<div class="mapa center row">
+						<div class="col-xs-12 col-sm-12 col-md-12">
+							<h3>Home > Mapa</h3>
+							<div id="caja"></div>
+						</div>
+					</div>
+					<div class="ruta center row invisible">
+						<div class="col-xs-12 col-sm-12 col-md-12">
+							<h3>Home > Ruta</h3>
+							<table style="text-align: center;" class="col-xs-12 col-sm-12 col-md-12 table table-bordered table-striped" id="tabla_tiendas">
+							      	<tr>
+							      		<th style="text-align: center;" class="col-xs-2 col-sm-2 col-md-2">Visitado</th>
+							      		<th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Nombre</th>
+							      		<th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Categorias</th>
+							      		<th style="text-align: center;" class="col-xs-2 col-sm-2 col-md-2">Acciones</th>
+							      	</tr>
+							      	<tr ng-repeat="destino in destinos | filter:search:strict">
+							        	<td class="destino-{{destino.visitada}}"><input type="checkbox" ng-model="destino.visitada" value="{{destino.nombre}}"></td>
+							        	<td class="destino-{{destino.visitada}}">{{destino.nombre}}</td>
+							        	<td class="destino-{{destino.visitada}}">{{destino.categorias}}</td>
+							        	<td class="destino-{{destino.visitada}}"><a ng-click="delete($index)">Borrar</a></td>
+							      	</tr>
+							</table>
+							<button type="button" class="btn btn-block btn-info" onclick="activarPantalla('pi')">
+								<span class="glyphicon glyphicon-plus"></span>Agregar Destinos
+							</button>
+						</div>
+					</div>
+					<div class="pi center row invisible">
+						<div class="col-xs-12 col-sm-12 col-md-12" style="padding-bottom:80px;">
+							<h3>Home > Rutas > Puntos de Interes</h3>
+							<div class="form-inline">
+								<input type="text"  placeholder="Ingresar Nombre de Tienda" class="form-control" id="busqueda-pi" ng-model="search.nombre">
+								<button type="button" class="btn btn-info btn-block">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</div><br>
+
+							<div>
+								<table style="text-align: center;" class="col-xs-12 col-sm-12 col-md-12 table table-bordered table-striped" id="tabla_tiendas">
+							      	<tr>
+							      		<th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4"></th>
+							      		<th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Nombre</th>
+							      		<th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Categorias</th>
+							      	</tr>
+							      	<tr ng-repeat="tienda in tiendas | filter:search:strict">
+							        	<td class="tienda-{{tienda.seleccionada}}"><input type="checkbox" ng-change="addToRoute()" ng-model="tienda.seleccionada" value="{{tienda.nombre}}"></td>
+							        	<td class="tienda-{{tienda.seleccionada}}">{{tienda.nombre}}</td>
+							        	<td class="tienda-{{tienda.seleccionada}}">{{tienda.categorias}}</td>
+							      	</tr>
+							    </table>
+							</div>
+
+							<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12">
+									<button type="button" ng-click="cleanAndReturn()" class="btn btn-info btn-md btn-block">
+										<span class="glyphicon glyphicon-plus"></span> Agregar a Ruta
+									</button> 
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="push"></div>
+		</div>
+		<nav class="navbar navbar-default navbar-fixed-bottom">
+			<div class="container">
+				<div class="row barrita left">
+					<div class="col-xs-3 col-sm-3 col-md-3">
+						<button type="button" class="btn btn-block btn-lg btn-primary" onclick="activarPantalla('mapa')">Mapa</button>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3">
+						<button type="button" class="btn btn-block btn-lg btn-primary" onclick="activarPantalla('ruta')">Ruta</button>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3">
+						<button type="button" class="btn btn-block btn-lg btn-primary">Estacionamiento</button>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3">
+					 	<button class="btn btn-block btn-primary btn-lg" onclick="cambiarBarra()">
+					 		<span class="glyphicon glyphicon-chevron-right"></span>
+					 	</button>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row barrita right invisible">
+					<div class="col-xs-3 col-sm-3 col-md-3">
+					 	<button class="btn btn-block btn-primary btn-lg" onclick="cambiarBarra()">
+					 		<span class="glyphicon glyphicon-chevron-left"></span>
+					 	</button>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3">
+						<button type="button" class="btn btn-block btn-primary btn-lg">Servicios</button>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3">
+						<button type="button" class="btn btn-block btn-primary btn-lg">Comida</button>
+					</div>
+					<div class="col-xs-3 col-sm-3 col-md-3">
+						<button type="button" class="btn btn-block btn-primary btn-lg">Telefono</button>
+					</div>
+				</div>
+			</div>
+		</nav>
+	</body>
+	
+	<!-- obtener_ruta(0, [ruta], (x-user, y-user), obtener_grafo() ) -->
+
+</html>
