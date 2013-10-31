@@ -1,0 +1,21 @@
+.barra{
+	position: relative;
+	bottom: 0px;
+}
+.invisible{
+	display: none;
+}
+.barrita{
+	background-color: light-blue;
+	padding: 5px;
+}
+.container{
+	height: 100%;
+}
+.tienda-true{
+	background-color: blue !important;
+}
+.destino-true{
+	text-decoration: line-through;
+	background-color: grey !important;
+}
