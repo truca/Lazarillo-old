@@ -91,6 +91,10 @@ data = new Object();
         });
     }
 
+    function get_puntos_transicion(){
+        
+    }
+
     function get_etiquetas(){
         arreglo = [], aux = [];
         $.post( "php/recintos_con_tags_json.php", { recinto: data.nombre_recinto }, function(info){
@@ -107,6 +111,7 @@ data = new Object();
         get_pisos();   
         get_etiquetas();
         get_posiciones();
+        get_puntos_transicion();
         get_adyacentes();
     }
     $(function(){
