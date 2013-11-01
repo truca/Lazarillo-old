@@ -1,5 +1,6 @@
 data = new Object();
     data.nombre_recinto = "Universidad1";
+    data.piso_actual = "0";
     data.pisos = [];
     data.nodos = {};
     data.nodos["etiquetas"] = [];
@@ -8,6 +9,8 @@ data = new Object();
     data.nodos["adyacencia"] = [];
     data.svg = new Object();
     data.svg.pisos = [];
+    data.ready = false;
+    data.geolocalizar = false;
 
 
     function get_posiciones(){
@@ -20,6 +23,11 @@ data = new Object();
                     data.nodos["posicion"].push([nodos[index]["IdNodo"],[nodos[index]["X"],nodos[index]["Y"]]]);
                 }
         });
+    }
+
+    function toggle_geolocalizar(){
+        if(data.geolocalizar) data.geolocalizar = false;
+        else data.geolocalizar = true;
     }
         
     function get_pisos(){
@@ -41,7 +49,7 @@ data = new Object();
                         for(index_cam in caminos){
                             cam.push(caminos[index_cam]["StringPath"]);
                         }
-                        data.svg.pisos.push({"nivel": piso, "regiones":reg, "caminos":cam});
+                        data.svg.pisos.push({"nivel": piso,"regiones": reg,"caminos": cam});
                     });
                 });
             }  
@@ -118,8 +126,19 @@ data = new Object();
         get_posiciones();
         get_puntos_transicion();
         get_adyacentes();
+        data.ready = true;
     }
+
+    
+
     $(function(){
-        get_data("Universidad1");    
+        get_data("Universidad1");
     });
+
+    setTimeout(function(){
+        //while(data.svg.pisos[0] === undefined){}
+        var piso = data.svg.pisos[0].nivel;    
+        dibujar_piso(piso);  
+        data.piso_actual = piso;
+    }, 5000);
     
