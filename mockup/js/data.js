@@ -92,7 +92,12 @@ data = new Object();
     }
 
     function get_puntos_transicion(){
-        
+        $.post( "php/PT_pisos.php", { recinto: data.nombre_recinto }, function(info){
+            tiendas = JSON.parse(info);
+            data.nodos['PT'] = [];
+            for(index in tiendas)
+                data.nodos['PT'].push({"id": tiendas[index].IdNodo, "nivel": tiendas[index].NroNivel});
+        });
     }
 
     function get_etiquetas(){
