@@ -31,12 +31,13 @@ data = new Object();
     }
         
     function get_pisos(){
-        var pisos = [], regiones=[], caminos=[];
+        var pisos = {}, regiones=[], caminos=[];
         //conseguir los pisos asociados a el recinto
         
         $.post( "php/niveles_recinto.php", { recinto: data.nombre_recinto }, function(floor){
             pisos = JSON.parse(floor);
-            for(index in pisos){
+            debugger
+            for(index = 0; index <= data.pisos.length; index++){
                 piso = pisos[index]["NroNivel"];
                 $.post( "php/regiones_nivel.php", { recinto: data.nombre_recinto, nivel: piso }, function(figure){
                     regiones = JSON.parse(figure);
@@ -50,6 +51,7 @@ data = new Object();
                             cam.push(caminos[index_cam]["StringPath"]);
                         }
                         data.svg.pisos.push({"nivel": piso,"regiones": reg,"caminos": cam});
+                        //data.svg.pisos[piso.toString()] = {"regiones": reg,"caminos": cam};
                     });
                 });
             }  
@@ -134,11 +136,3 @@ data = new Object();
     $(function(){
         get_data("Universidad1");
     });
-
-    setTimeout(function(){
-        //while(data.svg.pisos[0] === undefined){}
-        var piso = data.svg.pisos[0].nivel;    
-        dibujar_piso(piso);  
-        data.piso_actual = piso;
-    }, 5000);
-    

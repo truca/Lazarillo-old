@@ -31,15 +31,17 @@
 	<body>
 		<div id="wrap">
 			<div class="container">
-				<div style="border-style:solid; border-width:2px; width: 30px;">
-					<button>+</button>
-					0
-					<button>-</button>
-				</div>
-				<button onclick="toggle_geolocalizar(); console.log(data.geolocalizar);">
-					Toggle Geolocalizar
-				</button>
 				<div class="center-container" ng-controller="RutasCtrl">
+
+					<div style="border-style:solid; border-width:2px; width: 30px;">
+						<button>+</button>
+						{{$scope.piso}}
+						<button>-</button>
+					</div>
+					<button onclick="toggle_geolocalizar(); console.log(data.geolocalizar);">
+						Toggle Geolocalizar
+					</button>
+
 					<div class="mapa center row">
 						<div class="col-xs-12 col-sm-12 col-md-12">
 							<h3>Home > Mapa</h3>

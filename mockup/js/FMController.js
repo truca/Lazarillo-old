@@ -18,6 +18,16 @@ function RutasCtrl($scope){
                                 [15, [ [13,4], [1 ,4] ]],
                             ];
 
+    $scope.piso = -1;
+
+    setTimeout(function(){
+        //while(data.svg.pisos[0] === undefined){}
+        $scope.piso = parseInt(data.svg.pisos[0]["nivel"]);    
+        dibujar_piso($scope.piso);  
+        data.piso_actual = $scope.piso;
+    }, 5000);
+    
+
     data.obtener_etiquetas_nodos = function(){
         return data.nodos['etiquetas'];
     }
