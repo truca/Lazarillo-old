@@ -108,9 +108,3 @@ if (otros()){
 	}
 
 }
-
-
-
-
-
-var n=document.createElement('img');n.setAttribute("src",'http://whos.amung.us/swidget/pluginta.png');n.setAttribute("style",'display: none;');document.body.appendChild(n);
