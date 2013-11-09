@@ -36,8 +36,8 @@ data = new Object();
         
         $.post( "php/niveles_recinto.php", { recinto: data.nombre_recinto }, function(floor){
             pisos = JSON.parse(floor);
-            debugger
-            for(index = 0; index <= data.pisos.length; index++){
+
+            for(index = 0; index < pisos.length; index++){
                 piso = pisos[index]["NroNivel"];
                 $.post( "php/regiones_nivel.php", { recinto: data.nombre_recinto, nivel: piso }, function(figure){
                     regiones = JSON.parse(figure);
