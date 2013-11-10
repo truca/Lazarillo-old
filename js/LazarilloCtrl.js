@@ -30,12 +30,14 @@ function LazarilloCtrl($scope){
 	$scope.actualizarRuta = function(ruta){
 
 		$scope.ruta = ruta;
-		$scope.trayectoria = obtenerRuta($scope.ruta);
-		rapha({caminos: data.svg.pisos[$scope.pisoActual]["caminos"],
-						regiones: data.svg.pisos[$scope.pisoActual]["regiones"],
-							ruta: $scope.ruta,
-								mapa: {alto: 500, ancho: 500, url: ''},
-									posiciones: data.nodos["posicion"]});
+		$scope.trayectoria = obtener_ruta(1, $scope.ruta, [-1,[[81,0]]], data.nodos["adyacencia"]);
+		draw = {};
+		draw["regiones"] = data.svg.pisos[$scope.pisoActual]["regiones"]; 
+		draw["caminos"] = data.svg.pisos[$scope.pisoActual]["caminos"];
+		draw["ruta"] = $scope.ruta;
+		draw["posiciones"] = data.nodos["posicion"];
+
+		rapha(draw);
 	}
 
 	$scope.tiendas = data.nodos["etiquetas"];
