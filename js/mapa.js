@@ -39,17 +39,16 @@ function recordar_ubi() // funcion que se activa con el boton de georeferencia
    
 }
 
-function rapha()
-{/*
-    if (!pagina_cargada) //if de rigor, para comprobar que no se dibuja cuando quiere la cosa, y que no dibuja cualquier cosa
+function rapha(draw)
+{
+        if (!pagina_cargada) //if de rigor, para comprobar que no se dibuja cuando quiere la cosa, y que no dibuja cualquier cosa
     {
         return 0;
-    }    */ 
-    /*
+    }
+    
     var caminos = draw.caminos;
     var zonass = draw.regiones;
-    */
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     var ancho=$("#wrap").width();
     var alto= $("#wrap").height();
     

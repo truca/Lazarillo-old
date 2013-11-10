@@ -63,7 +63,7 @@ function LazarilloCtrl($scope){
       }
 
       $scope.ruta = $scope.ruta.concat(aux);
-      actualizarRuta($scope.ruta); 
+      $scope.actualizarRuta($scope.ruta); 
 
       for(index in $scope.tiendas ){
           if($scope.tiendas[index].seleccionada == true){
@@ -106,6 +106,6 @@ function LazarilloCtrl($scope){
     	_.each($scope.destinos, function(destino){
     		ruta.push(destino.id)
     	});
-    	actualizarRuta(ruta);
+    	$scope.actualizarRuta(ruta);
     }
 }
