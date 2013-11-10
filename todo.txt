@@ -8,10 +8,5 @@ encontrar posicion
 activar/desactivar geolocalizacion
 trazar ruta desde posicion
 
-eliminar pi de la ruta
 cambiar idioma 
 recordar ubicacion
-
-
-generar ruta
-conectar datos: ruta, destinos y tiendas

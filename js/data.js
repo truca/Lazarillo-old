@@ -7,6 +7,7 @@ data = new Object();
     data.nodos["posicion"] = [];
     //agregar variable al final de adyacencia, booleano de si es es PT
     data.nodos["adyacencia"] = [];
+    data.nodos["PT"] = [];
     data.svg = new Object();
     data.svg.pisos = [];
     data.ready = false;
