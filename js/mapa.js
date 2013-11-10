@@ -172,6 +172,9 @@ function rapha(draw)
             bath.toFront;
         }
     }
+    
+    mostrar_zonas(zonass);
+    mostrar_caminos(caminos);
 
 }
 
