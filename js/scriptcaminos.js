@@ -420,12 +420,12 @@ function grafo_pi(grafo,grafo_posiciones,coord)
 var id_nodo=nodo_distancia_menor(coord,grafo_posiciones);//guardamos el id del nodo mas cercando al pi
 var tam=grafo.length;
 var subtam;//variable usada para copiar las listas de adyacencia
-var grafo_aux= new Array():
+var grafo_aux=new Array();
 
 	for(var i=0;i<tam;i++)
 	{
 	grafo_aux[i]=new Array();
-	grafo_aux[i][0]=grafo[i][0]://guardamos el id actual
+	grafo_aux[i][0]=grafo[i][0];//guardamos el id actual
 	subtam=grafo[i][1].length;//guardamos la cantidad de adyacentes
 	grafo_aux[i][1]=new Array();
 		for(var j=0;i<subtam;j++)//copiamos todos los adyacentes al nodo actual
