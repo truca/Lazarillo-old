@@ -395,7 +395,6 @@ texto=texto+vector[i]+"}";
 
 console.log(texto);
 }
-
 //*****retorna el id del nodo mas cercano a las coordenadas señaladas
 function nodo_distancia_menor(coord,grafo_posiciones)
 {
@@ -417,10 +416,11 @@ var aux;
 //*****Grafo auxiliar que incluye el pi
 function grafo_pi(grafo,grafo_posiciones,coord)
 {
+console.log("GRAFO_PI:entre");
 var id_nodo=nodo_distancia_menor(coord,grafo_posiciones);//guardamos el id del nodo mas cercando al pi
 var tam=grafo.length;
 var subtam;//variable usada para copiar las listas de adyacencia
-var grafo_aux=new Array();
+var grafo_aux= new Array();
 
 	for(var i=0;i<tam;i++)
 	{
@@ -439,18 +439,21 @@ var grafo_aux=new Array();
 			grafo_aux[i][1][grafo_aux[i][1].length][1]=0;//Peso para ir del nodo al punto ingresado por el usuario, no es relevante
 			}
 	}
+	console.log("GRAFO_PI:sali");
 	return grafo_aux;
 }
 //****retorna la distancia entre 2 puntos
 
 function distancia_punto_punto(coord1,coord2)
 {
+console.log("DISTANCIA_PUNTO_PUNTO:entre y sali en teoria");
 return Math.sqrt(Math.pow(coord1[0]-coord2[0])+Math.pow(coord1[1]-coord2[1]));
 }
 
 //****Retorna la ruta al estacionamiento (sin parsear
 function volver_estacionamiento(coord_punto,adyacentes_actual,grafo,grafo_posiciones)
 {
+console.log("VOLVER:entre");
 var id=nodo_distancia_menor(coord_punto,grafo_posiciones);
 	return obtener_ruta(1,[id],adyacentes_actual,grafo_pi(grafo,grafo_posiciones,coord_punto));
 }
