@@ -33,23 +33,13 @@ function LazarilloCtrl($scope){
 	$scope.destinos = [];
 
 	$scope.addToRoute =function(){
-			for(index in $scope.tiendas ){
-          if($scope.tiendas[index].seleccionada == true){
-            	$scope.tiendas[index].agregada = true;
-          }
-      } 
-
 			array = _.filter($scope.tiendas, function(tienda){
-          return tienda.seleccionada;
+          return tienda.seleccionada && !tienda.agregada;
       });
 
-      //console.log(array);
-
-      array = _.sortBy(array, function(tienda){
-      	return tienda.posicion*-1;
-      })
-
-      //console.log(array);
+      _.each(array, function(elem){
+      	elem.visitado = false;
+      });
 
       $scope.destinos = $scope.destinos.concat(array);
 
@@ -60,24 +50,24 @@ function LazarilloCtrl($scope){
       }
 
       $scope.ruta = $scope.ruta.concat(aux); 
+
+      for(index in $scope.tiendas ){
+          if($scope.tiendas[index].seleccionada == true){
+            	$scope.tiendas[index].agregada = true;
+          }
+      }
 		}
 
 
-		$scope.setPosition =function(){
-
-				for(index in $scope.tiendas ){
-          if($scope.tiendas[index].seleccionada == true){
-            //$scope.tiendas[index].agregada = true;
-            $scope.tiendas[index].posicion = $scope.siguienteDestino;
-            $scope.siguienteDestino++;
-          }
-        }
-    }
+		$scope.setPosition =function(tienda, seleccionada){
+			if (seleccionada) {
+				tienda.posicion = $scope.siguienteDestino;
+        $scope.siguienteDestino++;
+      }
+		}
 
     $scope.quitarVisitados = function(){
-    	//console.log($scope.tiendas);
-
-			$scope.destinos = _.filter($scope.destinos, function(destino){
+    	$scope.destinos = _.filter($scope.destinos, function(destino){
     		return !destino.visitado;
     	});
 
@@ -85,10 +75,8 @@ function LazarilloCtrl($scope){
 			tiendas_agregadas = _.where($scope.tiendas, {agregada: true});
 
 			_.each(tiendas_agregadas, function(tienda_agregada){
-				if(_.where($scope.destinos, {id: tienda_agregada.id}).length > 0){
-					tienda_agregada.agregada = false;
-					tienda_agregada.seleccionada = false;
-				}
+				tienda_agregada.agregada = false;
+				tienda_agregada.seleccionada = false;
 			});
 
 			_.each(tiendas_agregadas, function(tienda_agregada){
@@ -105,6 +93,5 @@ function LazarilloCtrl($scope){
     		ruta.push(destino.id)
     	});
     	$scope.ruta = ruta;
-    	//console.log($scope.tiendas);
     }
 }

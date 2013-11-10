@@ -47,7 +47,7 @@
                   <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Categorias</th>
                 </tr>
                 <tr ng-repeat="tienda in tiendas | filter: {agregada: 'false'}">
-                  <td class="tienda-{{tienda.seleccionada}}"><input type="checkbox" ng-change="setPosition()" ng-model="tienda.seleccionada" value="{{tienda.id}}"></td>
+                  <td class="tienda-{{tienda.seleccionada}}"><input type="checkbox" ng-change="setPosition(tienda, tienda.seleccionada)" ng-model="tienda.seleccionada" value="{{tienda.id}}"></td>
                   <td class="tienda-{{tienda.seleccionada}}">{{tienda.nombre}}</td>
                   <td class="tienda-{{tienda.seleccionada}}">{{tienda.categorias}}</td>
                 </tr>
@@ -76,7 +76,7 @@
                   <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Visitado</th>
                   <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Nombre</th>
                 </tr>
-                <tr ng-repeat="destino in destinos | filter: {visitado: false}">
+                <tr ng-repeat="destino in destinos | filter: {visitado: false} | orderBy: -posicion">
                   <td class="destino-{{destino.seleccionada}}"><input type="checkbox" ng-change="quitarVisitados()" ng-model="destino.visitado" value="{{destino.id}}"></td>
                   <td class="destino-{{destino.seleccionada}}">{{destino.nombre}}</td>
                 </tr>
