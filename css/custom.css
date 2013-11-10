@@ -75,3 +75,8 @@ svg {
 .inv{
   display: none;
 }
+
+#menu button {
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
