@@ -41,6 +41,10 @@ function LazarilloCtrl($scope){
       	elem.visitado = false;
       });
 
+      /*array = _.sortBy(array, function(tienda){ 
+      	return tienda.posicion; 
+      });*/
+
       $scope.destinos = $scope.destinos.concat(array);
 
       aux = [];
