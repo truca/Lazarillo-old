@@ -116,7 +116,7 @@ data = new Object();
             tiendas = JSON.parse(info);
 
             for(index in tiendas){
-                data.nodos["etiquetas"].push({"id":tiendas[index]["IdNodo"], "nombre": tiendas[index]["Nombre"], "categorias": tiendas[index]["Etiquetas"], "seleccionada": false, "changed": false});
+                data.nodos["etiquetas"].push({"id":tiendas[index]["IdNodo"], "nombre": tiendas[index]["Nombre"], "categorias": tiendas[index]["Etiquetas"], "seleccionada": false, "agregada": false});
             }
         });
     }

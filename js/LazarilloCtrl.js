@@ -1,5 +1,7 @@
 function LazarilloCtrl($scope){
 
+	$scope.siguienteDestino = 1;
+
 	$scope.ajustarTamano = function(){
 		$(".wrap").height($("body").height()-60);
 	}
@@ -31,36 +33,78 @@ function LazarilloCtrl($scope){
 	$scope.destinos = [];
 
 	$scope.addToRoute =function(){
+			for(index in $scope.tiendas ){
+          if($scope.tiendas[index].seleccionada == true){
+            	$scope.tiendas[index].agregada = true;
+          }
+      } 
 
-				//$scope.ruta = [];
-        array = _.filter($scope.tiendas, function(tienda){
-            return tienda.seleccionada && !tienda.agregada;
-        });
+			array = _.filter($scope.tiendas, function(tienda){
+          return tienda.seleccionada;
+      });
 
-        $scope.destinos = $scope.destinos.concat(array);
+      //console.log(array);
 
-        console.log($scope.destinos); 
+      array = _.sortBy(array, function(tienda){
+      	return tienda.posicion*-1;
+      })
 
-        aux = [];
+      //console.log(array);
 
-        for(index in array){
-            aux.push(array[index]["id"]);
+      $scope.destinos = $scope.destinos.concat(array);
+
+      aux = [];
+
+      for(index in array){
+          aux.push(array[index]["id"]);
+      }
+
+      $scope.ruta = $scope.ruta.concat(aux); 
+		}
+
+
+		$scope.setPosition =function(){
+
+				for(index in $scope.tiendas ){
+          if($scope.tiendas[index].seleccionada == true){
+            //$scope.tiendas[index].agregada = true;
+            $scope.tiendas[index].posicion = $scope.siguienteDestino;
+            $scope.siguienteDestino++;
+          }
         }
-
-        $scope.ruta = $scope.ruta.concat(aux);
-
-        console.log($scope.ruta); 
-
-        for(index in $scope.tiendas ){
-            if($scope.tiendas[index]["seleccionada"] == true){
-                $scope.tiendas[index].agregada = true;
-            }
-        }  
     }
 
     $scope.quitarVisitados = function(){
-    	$scope.destinos = _.filter($scope.destinos, function(destino){
+    	//console.log($scope.tiendas);
+
+			$scope.destinos = _.filter($scope.destinos, function(destino){
     		return !destino.visitado;
     	});
+
+			//actualizar tiendas
+			tiendas_agregadas = _.where($scope.tiendas, {agregada: true});
+
+			_.each(tiendas_agregadas, function(tienda_agregada){
+				if(_.where($scope.destinos, {id: tienda_agregada.id}).length > 0){
+					tienda_agregada.agregada = false;
+					tienda_agregada.seleccionada = false;
+				}
+			});
+
+			_.each(tiendas_agregadas, function(tienda_agregada){
+				console.log(_.where($scope.destinos, {id: tienda_agregada.id}));
+				if(_.where($scope.destinos, {id: tienda_agregada.id}).length > 0){
+					tienda_agregada.agregada = true;
+					tienda_agregada.seleccionada = true;
+				}
+			});
+
+    	//actualizar ruta
+    	var ruta = [];
+    	_.each($scope.destinos, function(destino){
+    		ruta.push(destino.id)
+    	});
+    	$scope.ruta = ruta;
+    	//console.log($scope.tiendas);
     }
 }

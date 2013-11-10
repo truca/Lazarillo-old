@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <div id="pi" class="screen">
+    <div id="pi" class="screen inv">
       <div class="wrap">
 
         <div>
@@ -46,8 +46,8 @@
                   <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Nombre</th>
                   <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Categorias</th>
                 </tr>
-                <tr ng-repeat="tienda in tiendas">
-                  <td class="tienda-{{tienda.seleccionada}}"><input type="checkbox" ng-change="addToRoute()" ng-model="tienda.seleccionada" value="{{tienda.id}}"></td>
+                <tr ng-repeat="tienda in tiendas | filter: {agregada: 'false'}">
+                  <td class="tienda-{{tienda.seleccionada}}"><input type="checkbox" ng-change="setPosition()" ng-model="tienda.seleccionada" value="{{tienda.id}}"></td>
                   <td class="tienda-{{tienda.seleccionada}}">{{tienda.nombre}}</td>
                   <td class="tienda-{{tienda.seleccionada}}">{{tienda.categorias}}</td>
                 </tr>
@@ -61,14 +61,14 @@
             <button class="btn btn-footer-50 btn-primary" ng-click="toggleRuta()">
               <span class="glyphicon glyphicon-road">Volver</span>
             </button>
-            <button class="btn btn-footer-50 btn-primary" ng-click="toggleRuta()">
+            <button class="btn btn-footer-50 btn-primary" ng-click="addToRoute();toggleRuta()">
               <span class="glyphicon glyphicon-globe">Agregar a Ruta</span>
             </button>
           </div>
         </div>
       </div>
     </div>
-    <div id="ruta" class="screen">
+    <div id="ruta" class="screen inv">
       <div class="wrap">
         <div>
           <table style="text-align: center;" class="col-xs-12 col-sm-12 col-md-12 table table-bordered table-striped" id="tabla_tiendas">
@@ -76,7 +76,7 @@
                   <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Visitado</th>
                   <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Nombre</th>
                 </tr>
-                <tr ng-repeat="destino in destinos | filter:{agregada: false}">
+                <tr ng-repeat="destino in destinos | filter: {visitado: false}">
                   <td class="destino-{{destino.seleccionada}}"><input type="checkbox" ng-change="quitarVisitados()" ng-model="destino.visitado" value="{{destino.id}}"></td>
                   <td class="destino-{{destino.seleccionada}}">{{destino.nombre}}</td>
                 </tr>
