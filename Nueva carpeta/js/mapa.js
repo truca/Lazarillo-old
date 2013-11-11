@@ -2,7 +2,7 @@
 var pagina_cargada = false; // variable que sirve para el duende para que vea cuando la pagina se cargo
 var flag = true; // variable que controla la aparicion de los puntitos de ubicacion manual
 var semaforo_geo = true; // variable que activa la geolocalizacion
-var semaforo_rec_ubi = true; // variable para activar el recordar ubicacion
+var semaforo_rec_ubi = false; // variable para activar el recordar ubicacion
 var geo=document.getElementById("geolocalizacion");
 var ubicacion = new Array(); // arreglo que sirve para guardar la ubicacion manual dejada
 ubicacion[0] = false;
@@ -66,10 +66,10 @@ function rapha()
     var alto= $("#wrap").height();
     
     var foto=new Image();
-    foto.src="http://www.lazarillo.cl/hito1/upload/images/uni.png"; //recordar que tienes que obtener el mapa cuando se edita de esta forma, te tiene que llegar como parametro
+    foto.src="http://www.tractorverde.cl/Upload/images/uni.png"; //recordar que tienes que obtener el mapa cuando se edita de esta forma, te tiene que llegar como parametro
     var anchoimg=foto.width;
     var altoimg=foto.height;
-    var caja = Raphael('wrap','100%', '90%');
+    var caja = Raphael('wrap','100%','100%');
     //var botones_mapa = Raphael('wrap', '5%', '20%');
 
     caja.setViewBox(1,1,anchoimg,altoimg, true); 
@@ -82,18 +82,68 @@ function rapha()
     
 
     //aca, mediante el uso de la magia negra, se puede hacer el drag de la imagen de fondo
-    
-    var start = function () 
-    		{
-                this.ox = this.attr("x");
-                this.oy = this.attr("y");
-            },
-            move = function (dx, dy)
-            {
-                this.attr({ x: this.ox + dx, y: this.oy + dy });
-            };
 
-       
+	var viewBoxWidth = anchoimg;
+	var viewBoxHeight = altoimg;
+	var canvasID = "#wrap";
+	var startX,startY;
+	var mousedown = false;
+	var dX,dY;
+	var oX = 1, oY = 1, oWidth = viewBoxWidth, oHeight = viewBoxHeight;
+	var viewBox = caja.setViewBox(oX, oY, viewBoxWidth, viewBoxHeight, true);
+	viewBox.X = oX;
+	viewBox.Y = oY;
+	//var vB = paper.rect(viewBox.X,viewBox.Y,viewBoxWidth,viewBoxHeight)
+	    //.attr({stroke: "#009", "stroke-width": 9});;
+
+
+    /** This is high-level function.
+     * It must react to delta being more/less than zero.
+     */
+    function handle(delta) { //esto maneja directamente el zoom
+        vBHo = viewBoxHeight;
+        vBWo = viewBoxWidth;
+        if (delta < 0) {
+        viewBoxWidth *= 0.95;
+        viewBoxHeight*= 0.95;
+        }
+        else {
+        viewBoxWidth *= 1.05;
+        viewBoxHeight *= 1.05;
+        }
+                        
+		viewBox.X -= (viewBoxWidth - vBWo) / 2;
+		viewBox.Y -= (viewBoxHeight - vBHo) / 2;          
+		caja.setViewBox(viewBox.X,viewBox.Y,viewBoxWidth,viewBoxHeight, true);
+    }
+
+
+//ESTO PODRIA FUNCIONAR PARA HACER EL DRAG
+        $(canvasID).mousedown(function(e){
+            
+            if (caja.getElementByPoint( e.pageX, e.pageY ) != null) {return;}
+            mousedown = true;
+            startX = e.pageX; 
+            startY = e.pageY;    
+        });
+
+        $(canvasID).mousemove(function(e){
+            if (mousedown == false) {return;}
+            dX = startX - e.pageX;
+            dY = startY - e.pageY;
+            
+            
+            caja.setViewBox(viewBox.X + dX, viewBox.Y + dY, viewBoxWidth, viewBoxHeight);
+
+        })
+            
+        $(canvasID).mouseup(function(e){
+            if ( mousedown == false ) return; 
+            viewBox.X += dX; 
+            viewBox.Y += dY; 
+            mousedown = false; 
+            
+        });
 
     /************************************ Configuracion de los botones de zoom in, nivel y zoom out ************************************************/
     zoom_in = caja.path("M22.646,19.307c0.96-1.583,1.523-3.435,1.524-5.421C24.169,8.093,19.478,3.401,13.688,3.399C7.897,3.401,3.204,8.093,3.204,13.885c0,5.789,4.693,10.481,10.484,10.481c1.987,0,3.839-0.563,5.422-1.523l7.128,7.127l3.535-3.537L22.646,19.307zM13.688,20.369c-3.582-0.008-6.478-2.904-6.484-6.484c0.006-3.582,2.903-6.478,6.484-6.486c3.579,0.008,6.478,2.904,6.484,6.486C20.165,17.465,17.267,20.361,13.688,20.369zM15.687,9.051h-4v2.833H8.854v4.001h2.833v2.833h4v-2.834h2.832v-3.999h-2.833V9.051z").attr({"title": "Acercarse", 'opacity': 1, fill: "hsb(.6, .75, .75)", "stroke-width": 1.5});
@@ -105,13 +155,30 @@ function rapha()
     niv.translate(anchoimg/2 -40,altoimg-70);
     camb_niv_der.translate(anchoimg/2 - 20,altoimg-80);
     camb_niv_izq.translate(anchoimg/2 - 80,altoimg-80);
-
     zoom_out.translate(1,41);
     zoom_in.translate(1,1);
+
     zoom_in.toFront;
     zoom_out.toFront;
-	/***************************************************************************************************************************/
-	   
+	/*************************************** Control de zoom **************************************************************/
+	var control_zoom = 0;
+
+	zoom_out.click(function(e) 
+	{
+		if(control_zoom >0) // asi no alejamos hasta el infinito el zoom descontroladamente
+		{
+			control_zoom --;
+			handle(1);
+
+		}
+	});
+
+	zoom_in.click(function(e)// recordar hacer un translate de los botones, sino, se pierden
+	{
+		control_zoom ++;
+
+		handle(-1);
+	});
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     var bath = caja.set();
@@ -141,7 +208,9 @@ function rapha()
         {
                    
         });
+
         fath.push(camino);
+        
     }
 
     function dibujar_camino(arreglo, x_visitante, y_visitante) // Esta funcion dibuja el camino optimo. Se le entrega un arreglo con los nodos a visitar, la posicion x y la posicion y del visitante. Esta funcion retorna la ubicacion del visitante.
@@ -205,7 +274,6 @@ function rapha()
 
     mostrar_zonas(zonass);
     mostrar_caminos(caminos);
-    caja.set(cuadro, bath, fath).drag(move, start);
 }
 
 function obtener_geo() // funcion que se activa con el boton de georeferencia
