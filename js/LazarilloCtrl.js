@@ -65,13 +65,15 @@ function LazarilloCtrl($scope){
       }
 
       $scope.ruta = $scope.ruta.concat(aux);
-      $scope.actualizarRuta($scope.ruta); 
+      
 
       for(index in $scope.tiendas ){
           if($scope.tiendas[index].seleccionada == true){
             	$scope.tiendas[index].agregada = true;
           }
       }
+
+      $scope.actualizarRuta($scope.ruta); 
 		}
 
 
