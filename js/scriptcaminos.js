@@ -395,48 +395,76 @@ texto=texto+vector[i]+"}";
 
 console.log(texto);
 }
+
 //*****retorna el id del nodo mas cercano a las coordenadas señaladas
 function nodo_distancia_menor(coord,grafo_posiciones)
 {
-var tam=grafo.length;
+console.log("nodo_dist_menor:entre");
+var tam=grafo_posiciones.length;
 var id_nodo=grafo_posiciones[0][0];//guardamos el id del primer elemento del grafo
 var menor=distancia_punto_punto(grafo_posiciones[0][1],coord);//guardamos la distancia del punto actual al primer elemento del grafo
 var aux;
+
 	for(var i=1; i<tam; i++)
 	{
+	console.log("Variable id_nodo="+id_nodo);
+	console.log("Variable menor="+menor);
+	console.log("nodo_dist_menor:entre al for");
 	aux=distancia_punto_punto(grafo_posiciones[i][1],coord);//guardamos la distancia del punto actual al i-esimo elemento del grafo
+		console.log(aux+"<"+menor);
 		if(aux<menor)
 			{
+			console.log("nodo_dist_menor:entre al if");
 			menor=aux;
 			id_nodo=grafo_posiciones[i][0];//guardamos el id del i-esimo elemento del grafo
-			}	
+			}
+		console.log("nodo_dist_menor:pase el if");
 	}
+	console.log("nodo_dist_menor:sali del for");
+	console.log("nodo_dist_menor:sali");
 	return id_nodo;
 }
+
 //*****Grafo auxiliar que incluye el pi
 function grafo_pi(grafo,grafo_posiciones,coord)
 {
-console.log("GRAFO_PI:entre");
+console.log("GRAFO_PI");
+console.log("Parametros recibidos");
+console.log(grafo);
+console.log(grafo_posiciones);
+console.log(coord);
+
 var id_nodo=nodo_distancia_menor(coord,grafo_posiciones);//guardamos el id del nodo mas cercando al pi
 var tam=grafo.length;
 var subtam;//variable usada para copiar las listas de adyacencia
 var grafo_aux= new Array();
-
+var aux;
 	for(var i=0;i<tam;i++)
 	{
+	console.log("for 1: i="+i+", "+i+"<"+tam);
 	grafo_aux[i]=new Array();
 	grafo_aux[i][0]=grafo[i][0];//guardamos el id actual
 	subtam=grafo[i][1].length;//guardamos la cantidad de adyacentes
 	grafo_aux[i][1]=new Array();
-		for(var j=0;i<subtam;j++)//copiamos todos los adyacentes al nodo actual
+		for(var j=0;j<subtam;j++)//copiamos todos los adyacentes al nodo actual
 		{
+		console.log("for 2: j="+j+", "+j+"<"+subtam);
 		grafo_aux[i][1][j]=new Array();
+		console.log(grafo[i][1][j]);
 		copiar_arreglo(grafo_aux[i][1][j],grafo[i][1][j]);//copiamos el j-esimo adyacente al i-esimo adyacente del grafo
+		console.log("Copiamos");
+		console.log(grafo_aux[i][1][j]);
 		}
+		console.log("grafo_aux:");
+		console.log(grafo_aux);
+		console.log("if("+id_nodo+"=="+grafo_aux[i][0]+")");
 		if(id_nodo==grafo_aux[i][0])//si este es el nodo adyacente mas cercando a la posicion 
 			{
-			grafo_aux[i][1][grafo_aux[i][1].length][0]=-2;//ID del punto ingresado por el usuario, es generico
-			grafo_aux[i][1][grafo_aux[i][1].length][1]=0;//Peso para ir del nodo al punto ingresado por el usuario, no es relevante
+			aux=grafo_aux[i][1].length;
+			grafo_aux[i][1][aux]=new Array();
+			grafo_aux[i][1][aux][0]=-2;//ID del punto ingresado por el usuario, es generico
+			grafo_aux[i][1][aux][1]=0;//Peso para ir del nodo al punto ingresado por el usuario, no es relevante
+			console.log(grafo_aux);
 			}
 	}
 	console.log("GRAFO_PI:sali");
@@ -446,14 +474,16 @@ var grafo_aux= new Array();
 
 function distancia_punto_punto(coord1,coord2)
 {
-console.log("DISTANCIA_PUNTO_PUNTO:entre y sali en teoria");
-return Math.sqrt(Math.pow(coord1[0]-coord2[0])+Math.pow(coord1[1]-coord2[1]));
+var result;
+result=Math.sqrt(Math.pow(coord1[0]-coord2[0],2)+Math.pow(coord1[1]-coord2[1],2));
+return result;
 }
 
-//****Retorna la ruta al estacionamiento (sin parsear
+//****Retorna la ruta al estacionamiento (sin parsear)
 function volver_estacionamiento(coord_punto,adyacentes_actual,grafo,grafo_posiciones)
 {
 console.log("VOLVER:entre");
 var id=nodo_distancia_menor(coord_punto,grafo_posiciones);
+console.log("Pepe la lleva");
 	return obtener_ruta(1,[id],adyacentes_actual,grafo_pi(grafo,grafo_posiciones,coord_punto));
 }
