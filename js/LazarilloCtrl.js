@@ -27,18 +27,26 @@ function LazarilloCtrl($scope){
 		$(".screen").addClass("inv");
 		$("#ruta").removeClass("inv");
 	}
-	$scope.actualizarRuta = function(ruta){
 
+
+
+	$scope.actualizarRuta = function(ruta){
 		$scope.ruta = ruta;
 		$scope.trayectoria = obtener_ruta(1, $scope.ruta, [-1,[[81,0]]], data.nodos["adyacencia"]);
+	}
+
+	$scope.draw = function(){
 		draw = {};
-		draw["regiones"] = data.svg.pisos[$scope.pisoActual]["regiones"]; 
-		draw["caminos"] = data.svg.pisos[$scope.pisoActual]["caminos"];
-		draw["ruta"] = $scope.ruta;
-		draw["posiciones"] = data.nodos["posicion"];
+		draw.regiones = data.svg.pisos[$scope.pisoActual]["regiones"]; 
+		draw.caminos = [];//data.svg.pisos[$scope.pisoActual]["caminos"];
+		if($scope.trayectoria != [])
+			draw.ruta = ruta_a_posiciones($scope.trayectoria);
+		draw.x = 50;
+		draw.y = 50;
 
 		rapha(draw);
 	}
+	
 
 	$scope.tiendas = data.nodos["etiquetas"];
 
@@ -73,7 +81,8 @@ function LazarilloCtrl($scope){
           }
       }
 
-      $scope.actualizarRuta($scope.ruta); 
+      $scope.actualizarRuta($scope.ruta);
+      $scope.draw(); 
 		}
 
 
@@ -83,6 +92,20 @@ function LazarilloCtrl($scope){
         $scope.siguienteDestino++;
       }
 		}
+
+		
+		$scope.get_data = function(nombreRecinto){
+        data.nombre_recinto = nombreRecinto;
+        get_pisos();   
+        get_etiquetas();
+        get_posiciones();
+        get_puntos_transicion();
+        get_adyacentes();
+     		setTimeout(function(){
+     			$scope.draw();
+     		}, 5000);  
+    }
+    $scope.get_data("Universidad");
 
     $scope.quitarVisitados = function(){
     	$scope.destinos = _.filter($scope.destinos, function(destino){
@@ -111,5 +134,6 @@ function LazarilloCtrl($scope){
     		ruta.push(destino.id)
     	});
     	$scope.actualizarRuta(ruta);
+    	$scope.draw();
     }
 }

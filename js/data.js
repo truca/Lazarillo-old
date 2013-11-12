@@ -128,18 +128,14 @@
         });
     }
 
-    function get_data(nombreRecinto){
-        data.nombre_recinto = nombreRecinto;
-        get_pisos();   
-        get_etiquetas();
-        get_posiciones();
-        get_puntos_transicion();
-        get_adyacentes();
-        data.ready = true;
+    function ruta_a_posiciones(ruta){
+        return _.map(ruta, function(punto){
+            return posicion_desde_(punto);
+        });
     }
 
-    
-
-    $(function(){
-        get_data("Universidad");
-    });
+    function posicion_desde_(punto){
+        return _.find(data.nodos.posicion, function(pos){
+            return pos[0] == punto;
+        })[1];
+    }
