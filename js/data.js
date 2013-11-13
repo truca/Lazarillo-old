@@ -1,4 +1,5 @@
     data = new Object();
+    data.posicion = [50, 50];
     data.nombre_recinto = "Universidad1";
     data.piso_actual = "0";
     data.pisos = [];
@@ -75,7 +76,7 @@
     }
 
     function agregar_nodo(id_nodo){
-        data.nodos["adyacencia"].push([id_nodo,[]])
+        data.nodos["adyacencia"].push([parseInt(id_nodo),[]]);
     }
 
     function agregar(id_nodo, camino){
@@ -94,7 +95,7 @@
             agregar_nodo(nodo_b);
         
         //buscar tipo de adyacencia
-        agregar(nodo_a, [nodo_b, adyacencia["PesoCamino"]]);
+        agregar(nodo_a, [parseInt(nodo_b), parseFloat(adyacencia["PesoCamino"])]);
     }
 
     function get_adyacentes(){
@@ -135,7 +136,10 @@
     }
 
     function posicion_desde_(punto){
-        return _.find(data.nodos.posicion, function(pos){
-            return pos[0] == punto;
-        })[1];
+        if(_.find(data.nodos.posicion, function(pos){return pos[0] == punto;}) != undefined)
+            return _.find(data.nodos.posicion, function(pos){return pos[0] == punto;})[1];
+        else if(punto == -1)
+            return data.posicion;
+        else
+            return;
     }
