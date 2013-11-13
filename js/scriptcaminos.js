@@ -487,3 +487,65 @@ var id=nodo_distancia_menor(coord_punto,grafo_posiciones);
 console.log("Pepe la lleva");
 	return obtener_ruta(1,[id],adyacentes_actual,grafo_pi(grafo,grafo_posiciones,coord_punto));
 }
+
+/////////////////////////////////////////////////////////////////////////////////
+
+
+function dividir_pisos(piso_actual,ruta,puntos_transicion)
+{
+
+var ruta_sig=new Array();
+var tam_puntos_transicion=puntos_transicion.length;
+var tam_ruta=ruta.length;
+var rutas_por_piso=new Array();
+rutas_por_piso[0]=new Array();
+rutas_por_piso[0][0]=ruta[0];//guardamos el primer elemento de la ruta
+var indice=0;
+var excedente=0;
+var piso=piso_actual;
+
+	for(var i=1;i<tam_ruta;i++)//recorremos cada nodo de la ruta
+	{
+		rutas_por_piso[indice][i-excedente]=ruta[i];//guardamos la ruta en el primer parseo
+		for(var j=0;j<tam_puntos_transicion;j++)
+		{
+		console.log("ruta["+i+"]="+ruta[i]);
+		console.log(rutas_por_piso);
+			if(ruta[i]==puntos_transicion[j][0])//si estamos en un punto de transicion
+			{
+			indice=indice+1;
+			rutas_por_piso[indice]=new Array();
+			excedente=i+1;
+			j=tam_puntos_transicion;	
+			}
+		}
+	}
+return rutas_por_piso;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//	FUNCION(AUXILIAR): 	dado un id_siguiente, retorna el camino a ese nodo						//
+//	ENTRADAS:	nombre:	id_siguiente															//
+//						tipo:numerico															//
+//						Forma: id_nodo															//
+//						Descripcion: Es el id del nodo del cual queremos obtener su ruta desde 	//
+//						el actual																//
+//				nombre:	ruta																	//
+//						tipo:Arreglo															//
+//						Forma:[id_nodo_1,id_nodo_2,id_nodo_3,...,id_nodo_n]						//
+//						Descripcion: Es la ruta cumpleta del piso a realizar por el visitante	//
+//////////////////////////////////////////////////////////////////////////////////////////////////
+function ruta_al_siguiente(id_siguiente,ruta)
+{
+var tam=ruta.length;
+var ruta_sig=new Array();
+
+	for(var i=0;i<tam;i++)
+	{
+	ruta_sig[i]=ruta[i];//vamos añariendo nodos a la ruta al siguiente
+	if(id_siguiente==ruta[i])//verificamos si el nodo añadido es el siguente
+	return(ruta_sig);//si era el siguiente, se retorna la ruta
+	}
+return false;//retorna false si no encuentra el id_siguiente en la ruta
+}
+
