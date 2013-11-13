@@ -493,7 +493,6 @@ console.log("Pepe la lleva");
 
 function dividir_pisos(piso_actual,ruta,puntos_transicion)
 {
-
 var ruta_sig=new Array();
 var tam_puntos_transicion=puntos_transicion.length;
 var tam_ruta=ruta.length;
@@ -503,21 +502,42 @@ rutas_por_piso[0][0]=ruta[0];//guardamos el primer elemento de la ruta
 var indice=0;
 var excedente=0;
 var piso=piso_actual;
+var guardado=0;
 
 	for(var i=1;i<tam_ruta;i++)//recorremos cada nodo de la ruta
 	{
-		rutas_por_piso[indice][i-excedente]=ruta[i];//guardamos la ruta en el primer parseo
-		for(var j=0;j<tam_puntos_transicion;j++)
+		guardado=0;
+		console.log("revisando elemento "+i+" con excedente "+excedente);
+		for(var j=0;j<tam_puntos_transicion;j++)//revisamos si el nodo actual es un nodo de transicion
 		{
-		console.log("ruta["+i+"]="+ruta[i]);
-		console.log(rutas_por_piso);
+			console.log("ruta["+i+"]==puntos_transicion["+j+"][0]");
+			console.log(ruta[i]+"=="+puntos_transicion[j][0]);
 			if(ruta[i]==puntos_transicion[j][0])//si estamos en un punto de transicion
-			{
-			indice=indice+1;
-			rutas_por_piso[indice]=new Array();
-			excedente=i+1;
-			j=tam_puntos_transicion;	
+			{	
+				console.log("piso_actual==puntos_transicion["+j+"][1]");
+				console.log(piso_actual+"=="+puntos_transicion[j][1]);
+				if(piso_actual==puntos_transicion[j][1])//si el punto de transicion esta en en mismo piso
+				{
+				rutas_por_piso[indice][i-excedente]=ruta[i];//guardamos la ruta en el primer parseo
+				j=tam_puntos_transicion;
+				guardado=1;
+				}
+				else//si esta en otro piso
+				{
+				indice=indice+1;
+				rutas_por_piso[indice]=new Array();
+				excedente=i;
+				rutas_por_piso[indice][i-excedente]=ruta[i];//guardamos la ruta
+				console.log("guardo la ruta");
+				piso_actual=puntos_transicion[j][1];
+				j=tam_puntos_transicion;
+				console.log("paso de aqui???");
+				guardado=1;
+				}
 			}
+		}
+		if(guardado==0){
+		rutas_por_piso[indice][i-excedente]=ruta[i];//guardamos la ruta
 		}
 	}
 return rutas_por_piso;
