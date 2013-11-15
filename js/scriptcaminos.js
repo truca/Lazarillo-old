@@ -540,7 +540,7 @@ var guardado=0;
 		rutas_por_piso[indice][i-excedente]=ruta[i];//guardamos la ruta
 		}
 	}
-return rutas_por_piso;
+return rutas_por_piso[0];
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
