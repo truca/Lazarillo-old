@@ -37,17 +37,10 @@
       </div>
     </div>
     <div id="pi" class="screen inv">
-      <div class="wrap">
+      <div class="wrap2">
         <input class="col-xs-11 col-sm-11 col-md-11" type="text" ng-model="categorySearch">
         <button class="btn btn-primary col-xs-1 col-sm-1 col-md-1">Buscar</button>
         <div>
-          <table style="text-align: center;" class="col-xs-12 col-sm-12 col-md-12 table table-bordered table-striped" class="tabla_tiendas">
-            <tr>
-              <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Seleccion</th>
-              <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Nombre</th>
-              <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Categorias</th>
-            </tr>
-          </table>
           <div ng-repeat="categoria in categorias | filter:categorySearch:strict">
             <h3>{{categoria}}</h3>
             <hr width="70%" align="left">
@@ -62,7 +55,7 @@
         </div>
       </div>
 
-      <div class="footer">
+      <div class="footer sticky-footer">
         <div class="container">
           <div id="menu" class="btn-group col-xs-12 col-sm-12 col-md-12">
             <button class="btn btn-footer-50 btn-primary" ng-click="toggleRuta()">
