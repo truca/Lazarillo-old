@@ -1,5 +1,9 @@
 function LazarilloCtrl($scope){
 
+	$scope.trayectoria = [];
+	$scope.ruta = [];
+	$scope.ruta_secundaria = [-2];
+	$scope.destinos = [];
 	$scope.siguienteDestino = 1;
 	$scope.pisoActual = 0;
 	$scope.tiendas = [];
@@ -30,11 +34,19 @@ function LazarilloCtrl($scope){
 		$("#ruta").removeClass("inv");
 	}
 
+	$scope.toggleRutas = function(){
+		ruta_aux = $scope.ruta;
+		$scope.ruta = $scope.ruta_secundaria;
+		$scope.ruta_secundaria = ruta_aux;
 
+		$scope.actualizarRuta($scope.ruta);
+		$scope.draw();
+	}
 
 	$scope.actualizarRuta = function(ruta){
 		$scope.ruta = ruta;
-		$scope.trayectoria = obtener_ruta(1, $scope.ruta, [-1,[[132,0]]], data.nodos["adyacencia"]);
+		trayectoria = obtener_ruta(1, $scope.ruta, [-1,[[132,0]]], data.nodos["adyacencia"]);
+		$scope.trayectoria = dividir_pisos(data.pisos[$scope.pisoActual],trayectoria,data.nodos["PT"]);
 	}
 
 	$scope.draw = function(){
@@ -43,7 +55,7 @@ function LazarilloCtrl($scope){
 		draw.regiones = data.svg.pisos[$scope.pisoActual]["regiones"]; 
 		draw.caminos = [];//data.svg.pisos[$scope.pisoActual]["caminos"];
 		if($scope.trayectoria.length > 0)
-			draw.ruta = ruta_a_posiciones(ruta_al_siguiente($scope.ruta));
+			draw.ruta = ruta_a_posiciones(ruta_al_siguiente($scope.ruta[0], $scope.trayectoria));
 		draw.x = 50;
 		draw.y = 50;
 
@@ -56,15 +68,6 @@ function LazarilloCtrl($scope){
 			$scope.categorias = _.union($scope.categorias, tienda.categorias);
 		});
 	}, 2000);
-
-	
-	
-
-	$scope.trayectoria = [];
-	$scope.trayectoriaSecundaria = [];
-	$scope.trayectoriaPorPisos = [];
-	$scope.ruta = [];
-	$scope.destinos = [];
 
 	$scope.addToRoute =function(){
 			array = _.filter($scope.tiendas, function(tienda){

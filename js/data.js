@@ -1,5 +1,6 @@
     data = new Object();
     data.posicion = [50, 50];
+    data.estacionamiento = [150, 50];
     data.nombre_recinto = "Universidad1";
     data.piso_actual = "0";
     data.pisos = [];
@@ -140,6 +141,8 @@
             return _.find(data.nodos.posicion, function(pos){return pos[0] == punto;})[1];
         else if(punto == -1)
             return data.posicion;
+        else if(punto == -2)
+            return data.estacionamiento;
         else
             return;
     }
