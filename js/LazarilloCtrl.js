@@ -46,7 +46,10 @@ function LazarilloCtrl($scope){
 	$scope.actualizarRuta = function(ruta){
 		if(ruta.length > 0){
 			$scope.ruta = ruta;
-			trayectoria = obtener_ruta(1, [$scope.ruta[0]], [-1,[[132,0]]], data.nodos["adyacencia"]);
+			if($scope.ruta[0] == -2 && $scope.ruta.length == 1)
+				trayectoria = volver_estacionamiento(data.estacionamiento, [-1,[[132,0]]], data.nodos["adyacencia"], data.nodos["posicion"]);
+			else
+				trayectoria = obtener_ruta(1, [$scope.ruta[0]], [-1,[[132,0]]], data.nodos["adyacencia"]);
 			$scope.trayectoria = dividir_pisos(data.pisos[$scope.pisoActual],trayectoria,data.nodos["PT"]);
 		}
 		else
