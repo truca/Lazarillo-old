@@ -482,10 +482,13 @@ return result;
 //****Retorna la ruta al estacionamiento (sin parsear)
 function volver_estacionamiento(coord_punto,adyacentes_actual,grafo,grafo_posiciones)
 {
+var ruta=new Array();
 console.log("VOLVER:entre");
 var id=nodo_distancia_menor(coord_punto,grafo_posiciones);
 console.log("Pepe la lleva");
-	return obtener_ruta(1,[-2],adyacentes_actual,grafo_pi(grafo,grafo_posiciones,coord_punto));
+ruta=obtener_ruta(1,[id],adyacentes_actual,grafo_pi(grafo,grafo_posiciones,coord_punto));
+ruta.push(-2);
+return ruta;
 }
 
 /////////////////////////////////////////////////////////////////////////////////
