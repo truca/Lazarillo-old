@@ -44,9 +44,13 @@ function LazarilloCtrl($scope){
 	}
 
 	$scope.actualizarRuta = function(ruta){
-		$scope.ruta = ruta;
-		trayectoria = obtener_ruta(1, $scope.ruta, [-1,[[132,0]]], data.nodos["adyacencia"]);
-		$scope.trayectoria = dividir_pisos(data.pisos[$scope.pisoActual],trayectoria,data.nodos["PT"]);
+		if(ruta.length > 0){
+			$scope.ruta = ruta;
+			trayectoria = obtener_ruta(1, [$scope.ruta[0]], [-1,[[132,0]]], data.nodos["adyacencia"]);
+			$scope.trayectoria = dividir_pisos(data.pisos[$scope.pisoActual],trayectoria,data.nodos["PT"]);
+		}
+		else
+			$scope.trayectoria = [];
 	}
 
 	$scope.draw = function(){
@@ -78,6 +82,10 @@ function LazarilloCtrl($scope){
       	elem.visitado = false;
       });
 
+      array = _.sortBy(array, function(elem){
+				return elem.posicion;
+			});
+
       $scope.destinos = $scope.destinos.concat(array);
 
       aux = [];
@@ -93,7 +101,6 @@ function LazarilloCtrl($scope){
       console.log(aux);
 
       $scope.ruta = $scope.ruta.concat(aux);
-      
 
       for(index in $scope.tiendas ){
           if($scope.tiendas[index].seleccionada == true){
@@ -146,6 +153,10 @@ function LazarilloCtrl($scope){
 					tienda_agregada.agregada = true;
 					tienda_agregada.seleccionada = true;
 				}
+			});
+
+			$scope.destinos = _.sortBy($scope.destinos, function(destino){
+				return destino.posicion;
 			});
 
     	//actualizar ruta
