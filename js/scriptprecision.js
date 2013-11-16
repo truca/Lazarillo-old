@@ -50,3 +50,42 @@ var cant_sub_ady;
 	}
 return rectas;
 }
+
+function distancia_punto_recta(punto. recta)
+{
+
+var m_recta=recta[0];
+var n_recta=recta[1];
+var distancia;
+
+distancia=Math.abs(m_recta*punto[0]-punto[1]+n_recta)/Math.sqrt(m_recta*m_recta+1);
+
+}
+
+
+function proyeccion_punto_recta(punto, recta1)
+{
+
+var recta1=[];
+var recta_aux=[];//Se usa para guardar la pendiente y el coef de posición de la nueva recta que pasa por el punto y es perpendicular con la recta1
+var punto=[];//(x,y)
+var punto2=[];
+//inicializamos los valores de recta1
+recta1[0]=1;//pendiente
+recta1[1]=0;//coef. de posición
+
+//inicializamos los valores del punto
+punto[0]=0;
+punto[1]=2;
+document.write("Llegue aqui3 :D");
+recta_aux[0]=(-1)/recta1[0];
+recta_aux[1]=punto[1]+(punto[0]/recta1[0]);
+document.write("Llegue aqui :D");
+
+//Calculamos la interseccion de las rectas y lo guardamos en el punto2
+punto2[0]=(recta1[1]-recta_aux[1])/(recta_aux[0]-recta1[0]);
+punto2[1]=((recta1[1]*recta_aux[0])-(recta_aux[1]*recta1[0]))/(recta_aux[0]-recta1[0]);
+
+document.write("El nuevo punto es ("+punto2[0]+","+punto2[1]+")");
+
+}
