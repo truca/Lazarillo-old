@@ -43,7 +43,7 @@ function recordar_ubi() // funcion que se activa con el boton de georeferencia
 {
     if(semaforo_rec_ubi)
     {
-        semaforo_rec_ubi= false;   
+        semaforo_rec_ubi = false;   
     }
     else
     {
@@ -62,27 +62,91 @@ function rapha()
     var caminos = draw.caminos;
     var zonass = draw.regiones;*/
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	var inDetails = false;
+	var container = $("#wrap");
     var ancho=$("#wrap").width();
     var alto= $("#wrap").height();
-    
+   
     var foto=new Image();
     foto.src="http://www.tractorverde.cl/Upload/images/uni.png"; //recordar que tienes que obtener el mapa cuando se edita de esta forma, te tiene que llegar como parametro
+    
     var anchoimg=foto.width;
     var altoimg=foto.height;
-    var caja = Raphael('wrap','100%','100%');
+    var caja = Raphael('wrap',anchoimg ,altoimg);
     //var botones_mapa = Raphael('wrap', '5%', '20%');
+    var panZoom = caja.panzoom({ initialZoom: 3, initialPosition: { x: 0, y: 0} });
+	var isHandling = false;
 
-    caja.setViewBox(1,1,anchoimg,altoimg, true); 
+	panZoom.enable();
+    caja.safari();
+
+
 /*
     var svg = document.querySelector("svg");
     svg.removeAttribute("width");
     svg.removeAttribute("height");
 */
-    var cuadro = caja.rect(1, 1, anchoimg, altoimg).attr({stroke: "black", fill: 'url('+foto.src +')',"stroke-width": 1.5});
+    var cuadro = caja.rect(0, 0, anchoimg, altoimg).attr({stroke: "black","stroke-width": 1.5});
     
 
     //aca, mediante el uso de la magia negra, se puede hacer el drag de la imagen de fondo
+    ////
+	$("#mapContainer #up").click(function (e) { //zoom in 
+        panZoom.zoomIn(1);
+        e.preventDefault();
+    });
 
+    $("#mapContainer #down").click(function (e) { //zoom out
+        panZoom.zoomOut(1);
+        e.preventDefault();
+    });
+    
+    $("#others #moveTopLeft").click(function (e) {
+        panZoom.pan(1,1);
+    });
+
+	 function handleDetails() {
+        if (panZoom.isDragging() || isHandling) return;
+        isHandling = true;
+        var anim, box = this.getBBox();
+
+        if (inDetails) {
+            inDetails = false;
+            panZoom.enable();
+            this.hover(animateOver, animateOut);
+            anim = overlay.animate({ 'fill-opacity': 0 }, 300, function () { this.toBack(); isHandling = false; });
+            this.animateWith(overlay, anim, {
+                transform: ""
+            }, 300);
+            this.attr("fill", this.data("fill"));
+        }
+        else {
+            inDetails = true;
+            panZoom.disable();
+            this.unhover(animateOver, animateOut);
+            overlay.toFront();
+            this.toFront();
+
+            var currPaperPosition = panZoom.getCurrentPosition();
+            var currPaperZoom = panZoom.getCurrentZoom();
+
+            var currHeight = r.height * (1 - currPaperZoom * 0.1);
+
+            var zoomDif = (currHeight / 2) / box.height;
+
+            var xdif = currPaperPosition.x - box.x + ((box.width * zoomDif) - box.width) / 2;
+            var ydif = (currPaperPosition.y + ((currHeight / 2) - (box.height / 2))) - box.y;
+
+
+            anim = overlay.animate({ 'fill-opacity': 0.7 }, 300, function () { isHandling = false; });
+            this.animateWith(overlay, anim, {
+                transform: "t" + xdif + "," + ydif + "s" + zoomDif
+            }, 300);
+        }
+    }
+
+    /////
+    /*
 	var viewBoxWidth = anchoimg;
 	var viewBoxHeight = altoimg;
 	var canvasID = "#wrap";
@@ -100,6 +164,7 @@ function rapha()
     /** This is high-level function.
      * It must react to delta being more/less than zero.
      */
+     /*
     function handle(delta) { //esto maneja directamente el zoom
         vBHo = viewBoxHeight;
         vBWo = viewBoxWidth;
@@ -119,6 +184,7 @@ function rapha()
 
 
 //ESTO PODRIA FUNCIONAR PARA HACER EL DRAG
+/*
         $(canvasID).mousedown(function(e){
             
             if (caja.getElementByPoint( e.pageX, e.pageY ) != null) {return;}
@@ -143,25 +209,24 @@ function rapha()
             viewBox.Y += dY; 
             mousedown = false; 
             
-        });
+        });*/
 
     /************************************ Configuracion de los botones de zoom in, nivel y zoom out ************************************************/
-    zoom_in = caja.path("M22.646,19.307c0.96-1.583,1.523-3.435,1.524-5.421C24.169,8.093,19.478,3.401,13.688,3.399C7.897,3.401,3.204,8.093,3.204,13.885c0,5.789,4.693,10.481,10.484,10.481c1.987,0,3.839-0.563,5.422-1.523l7.128,7.127l3.535-3.537L22.646,19.307zM13.688,20.369c-3.582-0.008-6.478-2.904-6.484-6.484c0.006-3.582,2.903-6.478,6.484-6.486c3.579,0.008,6.478,2.904,6.484,6.486C20.165,17.465,17.267,20.361,13.688,20.369zM15.687,9.051h-4v2.833H8.854v4.001h2.833v2.833h4v-2.834h2.832v-3.999h-2.833V9.051z").attr({"title": "Acercarse", 'opacity': 1, fill: "hsb(.6, .75, .75)", "stroke-width": 1.5});
-    zoom_out = caja.path("M22.646,19.307c0.96-1.583,1.523-3.435,1.524-5.421C24.169,8.093,19.478,3.401,13.688,3.399C7.897,3.401,3.204,8.093,3.204,13.885c0,5.789,4.693,10.481,10.484,10.481c1.987,0,3.839-0.563,5.422-1.523l7.128,7.127l3.535-3.537L22.646,19.307zM13.688,20.369c-3.582-0.008-6.478-2.904-6.484-6.484c0.006-3.582,2.903-6.478,6.484-6.486c3.579,0.008,6.478,2.904,6.484,6.486C20.165,17.465,17.267,20.361,13.688,20.369zM8.854,11.884v4.001l9.665-0.001v-3.999L8.854,11.884z").attr({"title": "Alejarse",'opacity': 1, fill: "hsb(.6, .75, .75)", "stroke-width": 1.5});
+  
     camb_niv_izq = caja.path("M 40 60, L 10 60, L 40 42.68, Z").attr({"title": "Bajar Nivel",'opacity': 1, fill: "black", "stroke-width": 1.5});
-    camb_niv_der = caja.path("M 60 60, L 90 60, L 60 42.68, Z").attr({"title": "subir Nivel",'opacity': 1, fill: "black", "stroke-width": 1.5});
-    niv = caja.circle(40, 40, 10).attr({fill: "black", "stroke-width": 1.5, "title": "Subir Nivel"});
+    camb_niv_der = caja.path("M 60 60, L 90 60, L 60 42.68, Z").attr({"title": "Subir Nivel",'opacity': 1, fill: "black", "stroke-width": 1.5});
+    niv = caja.circle(40, 40, 10).attr({fill: "black", "stroke-width": 1.5, "title": "Nivel Actual"});
     
     niv.translate(anchoimg/2 -40,altoimg-70);
     camb_niv_der.translate(anchoimg/2 - 20,altoimg-80);
     camb_niv_izq.translate(anchoimg/2 - 80,altoimg-80);
-    zoom_out.translate(1,41);
-    zoom_in.translate(1,1);
+    //zoom_out.translate(1,41);
+    //zoom_in.translate(1,1);
 
-    zoom_in.toFront;
-    zoom_out.toFront;
+    //zoom_in.toFront;
+    //zoom_out.toFront;
 	/*************************************** Control de zoom **************************************************************/
-	var control_zoom = 0;
+	/*var control_zoom = 0;
 
 	zoom_out.click(function(e) 
 	{
@@ -178,7 +243,7 @@ function rapha()
 		control_zoom ++;
 
 		handle(-1);
-	});
+	});*/
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     var bath = caja.set();
@@ -224,7 +289,7 @@ function rapha()
                  modo = "L"; // El primero es M, el resto son L.
             caminos.push([modo, arreglo[i][0], arreglo[i][1]]); // va agregando cada coordenada al path, cuando termine, tendrá el path de todo el camino
         }
-        ruta_optima = caja.path(caminos).attr({stroke: "black", "stroke-width": 2});
+        ruta_optima = caja.path(caminos).attr({stroke: "black", "stroke-width": 5});
         ruta_optima.click(function(){
         ruta_optima.remove(); // remueve todo
         });
@@ -272,8 +337,13 @@ function rapha()
         }
     }
 
+
+    //cuadro.attr({fill: 'url('+foto.src +')'});
+    caja.image(foto.src, 0, 0, '100%', '100%');
+    caja.setViewBox(0,0,anchoimg,altoimg, true); 
     mostrar_zonas(zonass);
     mostrar_caminos(caminos);
+
 }
 
 function obtener_geo() // funcion que se activa con el boton de georeferencia
