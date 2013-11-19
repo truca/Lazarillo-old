@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LazarilloApp">
+    <meta name="author" content="LazarilloTeam">
+    <link rel="shortcut icon" href="http://getbootstrap.com/docs-assets/ico/favicon.png">
+
+    <title>Lazarillo</title>
+
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <script type="text/javascript" src="js/only.js"></script>
+
+  </head>
+  <body ng-controller="LazarilloCtrl">
+    <div id="mapContainer" class="screen"> 
+      <div id="wrap" class="wrap"></div>
+      <div id="mapControls"><a id="up" href="javascript:;"></a><a id="down" href="javascript:;"></a></div>
+      <div class="footer">
+        <div class="container">
+          <div id="menu" class="btn-group col-xs-12 col-sm-12 col-md-12">
+            <button class="btn btn-footer-25 btn-primary" ng-click="toggleRuta()">
+              <span class="glyphicon glyphicon-road"></span>
+            </button>
+            <button class="btn btn-footer-25 btn-primary">
+              <span class="glyphicon glyphicon-globe"></span>
+            </button>
+            <button class="btn btn-footer-25 btn-primary" onclick="recordar_ubi()">L</button>
+            <button class="btn btn-footer-25 btn-primary" onclick="obtener_geo()">
+              <span class="glyphicon glyphicon-map-marker"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="pi" class="screen inv">
+      <div class="wrap">
+
+        <div>
+          <table style="text-align: center;" class="col-xs-12 col-sm-12 col-md-12 table table-bordered table-striped" id="tabla_tiendas">
+                <tr>
+                  <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Seleccion</th>
+                  <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Nombre</th>
+                  <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Categorias</th>
+                </tr>
+                <tr ng-repeat="tienda in tiendas | filter: {agregada: 'false'}">
+                  <td class="tienda-{{tienda.seleccionada}}"><input type="checkbox" ng-change="setPosition(tienda, tienda.seleccionada)" ng-model="tienda.seleccionada" value="{{tienda.id}}"></td>
+                  <td class="tienda-{{tienda.seleccionada}}">{{tienda.nombre}}</td>
+                  <td class="tienda-{{tienda.seleccionada}}">{{tienda.categorias}}</td>
+                </tr>
+            </table>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="container">
+          <div id="menu" class="btn-group col-xs-12 col-sm-12 col-md-12">
+            <button class="btn btn-footer-50 btn-primary" ng-click="toggleRuta()">
+              <span class="glyphicon glyphicon-road">Volver</span>
+            </button>
+            <button class="btn btn-footer-50 btn-primary" ng-click="addToRoute();toggleRuta()">
+              <span class="glyphicon glyphicon-globe">Agregar a Ruta</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="ruta" class="screen inv">
+      <div class="wrap">
+        <div>
+          <table style="text-align: center;" class="col-xs-12 col-sm-12 col-md-12 table table-bordered table-striped" id="tabla_tiendas">
+                <tr>
+                  <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Visitado</th>
+                  <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Nombre</th>
+                </tr>
+                <tr ng-repeat="destino in destinos | filter: {visitado: false} | orderBy: ['posicion']">
+                  <td class="destino-{{destino.seleccionada}}"><input type="checkbox" ng-change="quitarVisitados()" ng-model="destino.visitado" value="{{destino.id}}"></td>
+                  <td class="destino-{{destino.seleccionada}}">{{destino.nombre}}</td>
+                </tr>
+            </table>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="container">
+          <div id="menu" class="btn-group col-xs-12 col-sm-12 col-md-12">
+            <button class="btn btn-footer-50 btn-primary" ng-click="toggleMapa()">
+              <span class="glyphicon glyphicon-globe">Volver</span>
+            </button>
+            <button class="btn btn-footer-50 btn-primary" ng-click="togglePI()">
+              <span class="glyphicon glyphicon-road">Agregar Destino</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="js/LazarilloCtrl.js"></script>
+  <script src="js/jquery-1.10.2.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/raphael.js"></script>
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="js/data.js"></script>
+  <script type="text/javascript" src="js/underscore-min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="js/mapa.js"></script>
+  <script type="text/javascript" src="js/raphael.pan-zoom.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+</html>
