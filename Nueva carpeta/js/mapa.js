@@ -29,14 +29,14 @@ window.onload = function()
 
 function setUbicacion(x,y) //RECORDAR QUE SON 2 UBICACIONES, LA DEL USUARIO Y LA QUE DESEA RECORDAR
 {
-    ubicacion[0]=x;
-    ubicacion[1]=y;
+    data.posicion=[x,y];
+    
     //alert(ubicacion);
 }
 
 function getUbicacion() // deberia devolver la ultima ubicación
 {
-    return ubicacion;
+    return data.posicion;
 }
 
 function recordar_ubi() // funcion que se activa con el boton de georeferencia
@@ -338,8 +338,8 @@ function rapha()
     }
 
 
-    //cuadro.attr({fill: 'url('+foto.src +')'});
-    caja.image(foto.src, 0, 0, '100%', '100%');
+    cuadro.attr({fill: 'url('+foto.src +')'});
+    //caja.image(foto.src, 0, 0, '100%', '100%');
     caja.setViewBox(0,0,anchoimg,altoimg, true); 
     mostrar_zonas(zonass);
     mostrar_caminos(caminos);
