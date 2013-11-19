@@ -395,48 +395,76 @@ texto=texto+vector[i]+"}";
 
 console.log(texto);
 }
+
 //*****retorna el id del nodo mas cercano a las coordenadas señaladas
 function nodo_distancia_menor(coord,grafo_posiciones)
 {
-var tam=grafo.length;
+console.log("nodo_dist_menor:entre");
+var tam=grafo_posiciones.length;
 var id_nodo=grafo_posiciones[0][0];//guardamos el id del primer elemento del grafo
 var menor=distancia_punto_punto(grafo_posiciones[0][1],coord);//guardamos la distancia del punto actual al primer elemento del grafo
 var aux;
+
 	for(var i=1; i<tam; i++)
 	{
+	console.log("Variable id_nodo="+id_nodo);
+	console.log("Variable menor="+menor);
+	console.log("nodo_dist_menor:entre al for");
 	aux=distancia_punto_punto(grafo_posiciones[i][1],coord);//guardamos la distancia del punto actual al i-esimo elemento del grafo
+		console.log(aux+"<"+menor);
 		if(aux<menor)
 			{
+			console.log("nodo_dist_menor:entre al if");
 			menor=aux;
 			id_nodo=grafo_posiciones[i][0];//guardamos el id del i-esimo elemento del grafo
-			}	
+			}
+		console.log("nodo_dist_menor:pase el if");
 	}
+	console.log("nodo_dist_menor:sali del for");
+	console.log("nodo_dist_menor:sali");
 	return id_nodo;
 }
+
 //*****Grafo auxiliar que incluye el pi
 function grafo_pi(grafo,grafo_posiciones,coord)
 {
-console.log("GRAFO_PI:entre");
+console.log("GRAFO_PI");
+console.log("Parametros recibidos");
+console.log(grafo);
+console.log(grafo_posiciones);
+console.log(coord);
+
 var id_nodo=nodo_distancia_menor(coord,grafo_posiciones);//guardamos el id del nodo mas cercando al pi
 var tam=grafo.length;
 var subtam;//variable usada para copiar las listas de adyacencia
 var grafo_aux= new Array();
-
+var aux;
 	for(var i=0;i<tam;i++)
 	{
+	console.log("for 1: i="+i+", "+i+"<"+tam);
 	grafo_aux[i]=new Array();
 	grafo_aux[i][0]=grafo[i][0];//guardamos el id actual
 	subtam=grafo[i][1].length;//guardamos la cantidad de adyacentes
 	grafo_aux[i][1]=new Array();
-		for(var j=0;i<subtam;j++)//copiamos todos los adyacentes al nodo actual
+		for(var j=0;j<subtam;j++)//copiamos todos los adyacentes al nodo actual
 		{
+		console.log("for 2: j="+j+", "+j+"<"+subtam);
 		grafo_aux[i][1][j]=new Array();
+		console.log(grafo[i][1][j]);
 		copiar_arreglo(grafo_aux[i][1][j],grafo[i][1][j]);//copiamos el j-esimo adyacente al i-esimo adyacente del grafo
+		console.log("Copiamos");
+		console.log(grafo_aux[i][1][j]);
 		}
+		console.log("grafo_aux:");
+		console.log(grafo_aux);
+		console.log("if("+id_nodo+"=="+grafo_aux[i][0]+")");
 		if(id_nodo==grafo_aux[i][0])//si este es el nodo adyacente mas cercando a la posicion 
 			{
-			grafo_aux[i][1][grafo_aux[i][1].length][0]=-2;//ID del punto ingresado por el usuario, es generico
-			grafo_aux[i][1][grafo_aux[i][1].length][1]=0;//Peso para ir del nodo al punto ingresado por el usuario, no es relevante
+			aux=grafo_aux[i][1].length;
+			grafo_aux[i][1][aux]=new Array();
+			grafo_aux[i][1][aux][0]=-2;//ID del punto ingresado por el usuario, es generico
+			grafo_aux[i][1][aux][1]=0;//Peso para ir del nodo al punto ingresado por el usuario, no es relevante
+			console.log(grafo_aux);
 			}
 	}
 	console.log("GRAFO_PI:sali");
@@ -446,14 +474,101 @@ var grafo_aux= new Array();
 
 function distancia_punto_punto(coord1,coord2)
 {
-console.log("DISTANCIA_PUNTO_PUNTO:entre y sali en teoria");
-return Math.sqrt(Math.pow(coord1[0]-coord2[0])+Math.pow(coord1[1]-coord2[1]));
+var result;
+result=Math.sqrt(Math.pow(coord1[0]-coord2[0],2)+Math.pow(coord1[1]-coord2[1],2));
+return result;
 }
 
-//****Retorna la ruta al estacionamiento (sin parsear
+//****Retorna la ruta al estacionamiento (sin parsear)
 function volver_estacionamiento(coord_punto,adyacentes_actual,grafo,grafo_posiciones)
 {
+var ruta=new Array();
 console.log("VOLVER:entre");
 var id=nodo_distancia_menor(coord_punto,grafo_posiciones);
-	return obtener_ruta(1,[id],adyacentes_actual,grafo_pi(grafo,grafo_posiciones,coord_punto));
+console.log("Pepe la lleva");
+ruta=obtener_ruta(1,[id],adyacentes_actual,grafo_pi(grafo,grafo_posiciones,coord_punto));
+ruta.push(-2);
+return ruta;
 }
+
+/////////////////////////////////////////////////////////////////////////////////
+
+
+function dividir_pisos(piso_actual,ruta,puntos_transicion)
+{
+var ruta_sig=new Array();
+var tam_puntos_transicion=puntos_transicion.length;
+var tam_ruta=ruta.length;
+var rutas_por_piso=new Array();
+rutas_por_piso[0]=new Array();
+rutas_por_piso[0][0]=ruta[0];//guardamos el primer elemento de la ruta
+var indice=0;
+var excedente=0;
+var piso=piso_actual;
+var guardado=0;
+
+	for(var i=1;i<tam_ruta;i++)//recorremos cada nodo de la ruta
+	{
+		guardado=0;
+		console.log("revisando elemento "+i+" con excedente "+excedente);
+		for(var j=0;j<tam_puntos_transicion;j++)//revisamos si el nodo actual es un nodo de transicion
+		{
+			console.log("ruta["+i+"]==puntos_transicion["+j+"][0]");
+			console.log(ruta[i]+"=="+puntos_transicion[j][0]);
+			if(ruta[i]==puntos_transicion[j][0])//si estamos en un punto de transicion
+			{	
+				console.log("piso_actual==puntos_transicion["+j+"][1]");
+				console.log(piso_actual+"=="+puntos_transicion[j][1]);
+				if(piso_actual==puntos_transicion[j][1])//si el punto de transicion esta en en mismo piso
+				{
+				rutas_por_piso[indice][i-excedente]=ruta[i];//guardamos la ruta en el primer parseo
+				j=tam_puntos_transicion;
+				guardado=1;
+				}
+				else//si esta en otro piso
+				{
+				indice=indice+1;
+				rutas_por_piso[indice]=new Array();
+				excedente=i;
+				rutas_por_piso[indice][i-excedente]=ruta[i];//guardamos la ruta
+				console.log("guardo la ruta");
+				piso_actual=puntos_transicion[j][1];
+				j=tam_puntos_transicion;
+				console.log("paso de aqui???");
+				guardado=1;
+				}
+			}
+		}
+		if(guardado==0){
+		rutas_por_piso[indice][i-excedente]=ruta[i];//guardamos la ruta
+		}
+	}
+return rutas_por_piso[0];
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//	FUNCION(AUXILIAR): 	dado un id_siguiente, retorna el camino a ese nodo						//
+//	ENTRADAS:	nombre:	id_siguiente															//
+//						tipo:numerico															//
+//						Forma: id_nodo															//
+//						Descripcion: Es el id del nodo del cual queremos obtener su ruta desde 	//
+//						el actual																//
+//				nombre:	ruta																	//
+//						tipo:Arreglo															//
+//						Forma:[id_nodo_1,id_nodo_2,id_nodo_3,...,id_nodo_n]						//
+//						Descripcion: Es la ruta cumpleta del piso a realizar por el visitante	//
+//////////////////////////////////////////////////////////////////////////////////////////////////
+function ruta_al_siguiente(id_siguiente,ruta)
+{
+var tam=ruta.length;
+var ruta_sig=new Array();
+
+	for(var i=0;i<tam;i++)
+	{
+	ruta_sig[i]=ruta[i];//vamos añariendo nodos a la ruta al siguiente
+	if(id_siguiente==ruta[i])//verificamos si el nodo añadido es el siguente
+	return(ruta_sig);//si era el siguiente, se retorna la ruta
+	}
+return false;//retorna false si no encuentra el id_siguiente en la ruta
+}
+

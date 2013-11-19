@@ -1,7 +1,13 @@
 function LazarilloCtrl($scope){
 
+	$scope.trayectoria = [];
+	$scope.ruta = [];
+	$scope.ruta_secundaria = [-2];
+	$scope.destinos = [];
 	$scope.siguienteDestino = 1;
 	$scope.pisoActual = 0;
+	$scope.tiendas = [];
+	$scope.categorias = [];
 
 	$scope.ajustarTamano = function(){
 		$(".wrap").height($("body").height()-60);
@@ -27,23 +33,48 @@ function LazarilloCtrl($scope){
 		$(".screen").addClass("inv");
 		$("#ruta").removeClass("inv");
 	}
-	$scope.actualizarRuta = function(ruta){
 
-		$scope.ruta = ruta;
-		$scope.trayectoria = obtenerRuta($scope.ruta);
-		rapha({caminos: data.svg.pisos[$scope.pisoActual]["caminos"],
-						regiones: data.svg.pisos[$scope.pisoActual]["regiones"],
-							ruta: $scope.ruta,
-								mapa: {alto: 500, ancho: 500, url: ''},
-									posiciones: data.nodos["posicion"]});
+	$scope.toggleRutas = function(){
+		ruta_aux = $scope.ruta;
+		$scope.ruta = $scope.ruta_secundaria;
+		$scope.ruta_secundaria = ruta_aux;
+
+		$scope.actualizarRuta($scope.ruta);
+		$scope.draw();
 	}
 
-	$scope.tiendas = data.nodos["etiquetas"];
+	$scope.actualizarRuta = function(ruta){
+		if(ruta.length > 0){
+			$scope.ruta = ruta;
+			if($scope.ruta[0] == -2 && $scope.ruta.length == 1)
+				trayectoria = volver_estacionamiento(data.estacionamiento, [-1,[[132,0]]], data.nodos["adyacencia"], data.nodos["posicion"]);
+			else
+				trayectoria = obtener_ruta(1, [$scope.ruta[0]], [-1,[[132,0]]], data.nodos["adyacencia"]);
+			$scope.trayectoria = dividir_pisos(data.pisos[$scope.pisoActual],trayectoria,data.nodos["PT"]);
+		}
+		else
+			$scope.trayectoria = [];
+	}
 
-	$scope.trayectoria = [];
-	$scope.trayectoria_por_pisos = [];
-	$scope.ruta = [];
-	$scope.destinos = [];
+	$scope.draw = function(){
+		$("#wrap").html("");
+		draw = {};
+		draw.regiones = data.svg.pisos[$scope.pisoActual]["regiones"]; 
+		draw.caminos = [];//data.svg.pisos[$scope.pisoActual]["caminos"];
+		if($scope.trayectoria.length > 0)
+			draw.ruta = ruta_a_posiciones(ruta_al_siguiente($scope.ruta[0], $scope.trayectoria));
+		draw.x = 50;
+		draw.y = 50;
+
+		rapha(draw);
+	}
+	
+	setTimeout(function() {
+		$scope.tiendas = data.nodos["etiquetas"];
+		_.each($scope.tiendas, function(tienda){
+			$scope.categorias = _.union($scope.categorias, tienda.categorias);
+		});
+	}, 2000);
 
 	$scope.addToRoute =function(){
 			array = _.filter($scope.tiendas, function(tienda){
@@ -54,6 +85,10 @@ function LazarilloCtrl($scope){
       	elem.visitado = false;
       });
 
+      array = _.sortBy(array, function(elem){
+				return elem.posicion;
+			});
+
       $scope.destinos = $scope.destinos.concat(array);
 
       aux = [];
@@ -62,14 +97,22 @@ function LazarilloCtrl($scope){
           aux.push(array[index]["id"]);
       }
 
+      aux = _.map(aux, function(au){
+      	return parseInt(au);
+      });
+
+      console.log(aux);
+
       $scope.ruta = $scope.ruta.concat(aux);
-      $scope.actualizarRuta($scope.ruta); 
 
       for(index in $scope.tiendas ){
           if($scope.tiendas[index].seleccionada == true){
             	$scope.tiendas[index].agregada = true;
           }
       }
+
+      $scope.actualizarRuta($scope.ruta);
+      $scope.draw(); 
 		}
 
 
@@ -79,6 +122,20 @@ function LazarilloCtrl($scope){
         $scope.siguienteDestino++;
       }
 		}
+
+		
+		$scope.get_data = function(nombreRecinto){
+        data.nombre_recinto = nombreRecinto;
+        get_pisos();   
+        get_etiquetas();
+        get_posiciones();
+        get_puntos_transicion();
+        get_adyacentes();
+     		setTimeout(function(){
+     			$scope.draw();
+     		}, 5000);  
+    }
+    $scope.get_data("Universidad");
 
     $scope.quitarVisitados = function(){
     	$scope.destinos = _.filter($scope.destinos, function(destino){
@@ -101,11 +158,16 @@ function LazarilloCtrl($scope){
 				}
 			});
 
+			$scope.destinos = _.sortBy($scope.destinos, function(destino){
+				return destino.posicion;
+			});
+
     	//actualizar ruta
     	var ruta = [];
     	_.each($scope.destinos, function(destino){
     		ruta.push(destino.id)
     	});
     	$scope.actualizarRuta(ruta);
+    	$scope.draw();
     }
 }

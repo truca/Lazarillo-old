@@ -8,11 +8,10 @@ var ubicacion = new Array(); // arreglo que sirve para guardar la ubicacion manu
 ubicacion[0] = false;
 ubicacion[1] = false;
 
-/*
 window.onload = function()
 {
     pagina_cargada = true; 
-}*/
+}
 
 function setUbicacion(x,y) //RECORDAR QUE SON 2 UBICACIONES, LA DEL USUARIO Y LA QUE DESEA RECORDAR
 {
@@ -41,7 +40,7 @@ function recordar_ubi() // funcion que se activa con el boton de georeferencia
 
 function rapha(draw)
 {
-        if (!pagina_cargada) //if de rigor, para comprobar que no se dibuja cuando quiere la cosa, y que no dibuja cualquier cosa
+    if (!pagina_cargada) //if de rigor, para comprobar que no se dibuja cuando quiere la cosa, y que no dibuja cualquier cosa
     {
         return 0;
     }
@@ -56,7 +55,7 @@ function rapha(draw)
     foto.src="http://www.lazarillo.cl/hito1/upload/images/uni.png"; //recordar que tienes que obtener el mapa cuando se edita de esta forma, te tiene que llegar como parametro
     var anchoimg=foto.width;
     var altoimg=foto.height;
-    var caja = Raphael('wrap','100%', '90%');
+    var caja = Raphael('wrap','100%', '100%');
     //var botones_mapa = Raphael('wrap', '5%', '20%');
 
     caja.setViewBox(1,1,anchoimg,altoimg, true);
@@ -175,7 +174,7 @@ function rapha(draw)
     
     mostrar_zonas(zonass);
     mostrar_caminos(caminos);
-
+    dibujar_camino(draw.ruta, draw.x, draw.y);
 }
 
 function obtener_geo() // funcion que se activa con el boton de georeferencia
@@ -226,7 +225,7 @@ function mostrar(posicion) //esta funcion obtiene la geolocalizacón, esta sacad
     icono.style.top=posicionLongitud; */
 }
 
-window.onload = function()
+/*window.onload = function()
 {
     rapha(); 
-}
+}*/

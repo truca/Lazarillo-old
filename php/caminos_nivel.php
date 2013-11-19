@@ -3,7 +3,7 @@
 	mysql_select_db("tractorv_lazarillo", $con) or die(mysql_error());
 	mysql_query("SET NAMES 'utf8'");
 
-	$sql = "select StringPath from Camino where IdNodoA in (select IdNodo from Nodo where IdNivel in (select IdNivel from Nivel where NombreRecinto = 'Universidad Federico Santa María, Sede San Joaquín' and NroNivel = 1))";
+	$sql = "select StringPath from Camino where IdNodoA in (select IdNodo from Nodo where IdNivel in (select IdNivel from Nivel where NombreRecinto = '".$_POST["recinto"]."' and NroNivel = ".$_POST["nivel"]."))";
 
 	$q = mysql_query( $sql ) or die(mysql_error());
 	
