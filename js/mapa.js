@@ -151,7 +151,35 @@ function rapha(draw)
         ubicacion.clear;
         zona.click(function(e) //reparar esto URGENTE
         {
-                    
+            var IE = document.all?true:false, x, y;
+	        if (IE) {
+	        x = e.clientX + document.body.scrollLeft +
+	          document.documentElement.scrollLeft;
+	        y = e.clientY + document.body.scrollTop +
+	           document.documentElement.scrollTop;
+	        }          
+	        else {
+	               x = e.pageX;
+	               y = e.pageY;
+	        } 
+	                //actualiza la posición del cursor del mouse  
+	        cursorM_X = x - document.getElementById("wrap").offsetLeft;
+	        cursorM_Y = y - document.getElementById("wrap").offsetTop;
+	        if (semaforo_rec_ubi)
+	        {
+	        	if(!flag)
+		        {
+		            posicion.remove();
+		            flag=true;
+		        }
+
+		        if(flag)
+		        {
+		            posicion = caja.circle(cursorM_X,cursorM_Y,5).attr({fill: "blue"});
+		            flag = false;
+		        }      
+	        }
+	        
         });
         bath.push(zona);
         bath.attr({'opacity': .5, fill:"#49796b"});
@@ -166,6 +194,34 @@ function rapha(draw)
 
         camino.click(function(e)
         {
+        	var IE = document.all?true:false, x, y;
+	        if (IE) {
+	        x = e.clientX + document.body.scrollLeft +
+	          document.documentElement.scrollLeft;
+	        y = e.clientY + document.body.scrollTop +
+	           document.documentElement.scrollTop;
+	        }          
+	        else {
+	               x = e.pageX;
+	               y = e.pageY;
+	        } 
+	                //actualiza la posición del cursor del mouse  
+	        cursorM_X = x - document.getElementById("wrap").offsetLeft;
+	        cursorM_Y = y - document.getElementById("wrap").offsetTop;
+	        if (semaforo_rec_ubi)
+	        {
+	        	if(!flag)
+		        {
+		            posicion.remove();
+		            flag=true;
+		        }
+
+		        if(flag)
+		        {
+		            posicion = caja.circle(cursorM_X,cursorM_Y,5).attr({fill: "blue"});
+		            flag = false;
+		        }      
+	        }
                    
         });
 
@@ -194,30 +250,33 @@ function rapha(draw)
     cuadro.click(function(e) // esta funcion muesta un circulo verde de acuerdo a la posicion donde se haga click
     {
     	var IE = document.all?true:false, x, y;
-        if (IE) {
-        x = e.clientX + document.body.scrollLeft +
-          document.documentElement.scrollLeft;
-        y = e.clientY + document.body.scrollTop +
-           document.documentElement.scrollTop;
-        }          
-        else {
-               x = e.pageX;
-               y = e.pageY;
-        } 
-                //actualiza la posición del cursor del mouse  
-        cursorM_X = x - document.getElementById("wrap").offsetLeft;
-        cursorM_Y = y - document.getElementById("wrap").offsetTop;
-        if(!flag)
-        {
-            posicion.remove();
-            flag=true;
-        }
+	        if (IE) {
+	        x = e.clientX + document.body.scrollLeft +
+	          document.documentElement.scrollLeft;
+	        y = e.clientY + document.body.scrollTop +
+	           document.documentElement.scrollTop;
+	        }          
+	        else {
+	               x = e.pageX;
+	               y = e.pageY;
+	        } 
+	                //actualiza la posición del cursor del mouse  
+	        cursorM_X = x - document.getElementById("wrap").offsetLeft;
+	        cursorM_Y = y - document.getElementById("wrap").offsetTop;
+	        if (semaforo_rec_ubi)
+	        {
+	        	if(!flag)
+		        {
+		            posicion.remove();
+		            flag=true;
+		        }
 
-        if(flag)
-        {
-            posicion = caja.circle(cursorM_X,cursorM_Y,5).attr({fill: "blue"});
-            flag = false;
-        }
+		        if(flag)
+		        {
+		            posicion = caja.circle(cursorM_X,cursorM_Y,5).attr({fill: "blue"});
+		            flag = false;
+		        }      
+	        }
 
     });
           
