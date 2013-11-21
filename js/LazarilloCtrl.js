@@ -63,9 +63,8 @@ function LazarilloCtrl($scope){
 		draw.caminos = [];//data.svg.pisos[$scope.pisoActual]["caminos"];
 		if($scope.trayectoria.length > 0)
 			draw.ruta = ruta_a_posiciones(ruta_al_siguiente($scope.ruta[0], $scope.trayectoria));
-		draw.x = 50;
-		draw.y = 50;
-
+		else 
+			draw.ruta = [];
 		rapha(draw);
 	}
 	
@@ -131,9 +130,10 @@ function LazarilloCtrl($scope){
         get_posiciones();
         get_puntos_transicion();
         get_adyacentes();
-     		setTimeout(function(){
+     		var draw_mapa = setInterval(function(){
      			$scope.draw();
-     		}, 5000);  
+     			clearInterval(draw_mapa);
+     		}, 500);  
     }
     $scope.get_data("Universidad");
 

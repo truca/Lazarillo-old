@@ -39,32 +39,26 @@
         //conseguir los pisos asociados a el recinto
         
         $.post( "php/niveles_recinto.php", { recinto: data.nombre_recinto }, function(floor){
-            
             pisos = JSON.parse(floor);
-
-            $.post( "php/regiones_nivel_2.php", { recinto: data.nombre_recinto }, function(figure){
-                regiones = JSON.parse(figure)
-                
-                regiones = _.groupBy(regiones, function(region){ 
-                    return region.NroNivel; 
-                });
-
-                for(region in regiones)
-
-                aux = [];
-
-
-                _.each(regiones, function(region){
-                    piso = {nivel: region[0]["NroNivel"], regiones: []} 
-                    _.each(region, function(reg){
-                        piso.regiones.push(reg.Region);
-                    });
-                    aux.push(piso);
-                });
-                data.svg.pisos = aux;
+            data.pisos = pisos;
+        });
+        $.post( "php/regiones_nivel.php", { recinto: data.nombre_recinto }, function(figure){
+            regiones = JSON.parse(figure)
+            
+            regiones = _.groupBy(regiones, function(region){ 
+                return region.NroNivel; 
             });
 
-            data.pisos = pisos;
+            aux = [];
+
+            _.each(regiones, function(region){
+                piso = {nivel: region[0]["NroNivel"], regiones: []} 
+                _.each(region, function(reg){
+                    piso.regiones.push(reg.Region);
+                });
+                aux.push(piso);
+            });
+            data.svg.pisos = aux;
         });
     }
 

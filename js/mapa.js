@@ -113,9 +113,9 @@ function rapha(draw)
         fath.push(camino);
     }
 
-    function dibujar_camino(arreglo, x_visitante, y_visitante) // Esta funcion dibuja el camino optimo. Se le entrega un arreglo con los nodos a visitar, la posicion x y la posicion y del visitante. Esta funcion retorna la ubicacion del visitante.
+    function dibujar_camino(arreglo) // Esta funcion dibuja el camino optimo. Se le entrega un arreglo con los nodos a visitar, la posicion x y la posicion y del visitante. Esta funcion retorna la ubicacion del visitante.
     {
-        arreglo.unshift([x_visitante,y_visitante]);
+        //arreglo.unshift([x_visitante,y_visitante]);
         var caminos = [];
         var modo = "M";
         for(var i=0;i<arreglo.length;i++)
@@ -174,7 +174,8 @@ function rapha(draw)
     
     mostrar_zonas(zonass);
     mostrar_caminos(caminos);
-    dibujar_camino(draw.ruta, draw.x, draw.y);
+    if(draw.ruta.length > 0)
+        dibujar_camino(draw.ruta);
 }
 
 function obtener_geo() // funcion que se activa con el boton de georeferencia
