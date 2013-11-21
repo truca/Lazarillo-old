@@ -21,11 +21,11 @@ zonass[1]= "M166.71,26.155v0.639h-0.851l-0.213-0.852l0.213-0.425l-1.066,0.212l0.
 zonass[2] = "M113.819,117.351v38.96l0.502-0.251l6.602-0.641l1.064-0.212l4.26,0.426l2.343-1.276l4.046,2.129l2.981,2.342h1.917l-0.213-0.426l0.426-0.213h1.491l2.555,2.131h2.556l-0.64-0.64l0.426-0.214l0.427,0.426l0.426-0.639l2.341,2.343l-0.638,0.214v1.063l1.276-0.64l0.853,0.213l0.853,1.703l-0.64,0.854l0.213-0.639h-1.062l0.424,0.852l-0.424,0.641l0.851,0.211l-0.427,0.641l1.278,1.277l-0.426-1.277l0.64,1.277l0.639-0.426l1.277,0.853l-0.64-0.64l1.063,0.213l-0.424,0.427l1.276,1.702v1.277l2.344,2.131l1.277,5.75l0.213-0.64l0.213,0.64l0.425,0.213l-0.851,0.213l-0.427-0.853l0.213-0.213l-0.854-0.214v-0.425l-0.638,1.276l0.851-0.426l2.558,3.194l1.063-0.64l1.065,1.278l0.425-2.344l-1.49,0.64l0.641-0.427l0.213-1.703l0.851-0.427l0.427,0.427v-1.489l3.194-3.621l2.556-1.277l-0.64,0.213l0.427-0.852l0.428,0.424l1.49-0.424l1.489-4.261l1.277-1.491l0.853,0.428v-4.26l1.064,2.342l0.213,1.918l0.64,0.639l-1.704,1.49l1.277,2.343l-2.557,2.556l-0.637,1.918l-0.428,0.213l0.428,1.276l-0.641,1.278l0.426-0.213l0.215,1.277l-0.428,2.556l-0.427,0.426l-2.554-0.64l-1.066,3.194l2.13-0.214l1.704-1.275l1.49,0.638l0.853-0.425l-0.426-0.428l1.063-2.342l0.213-2.13l1.279-2.981l3.193,5.537l-0.428,0.213l-0.213-0.639l-0.213,4.686l-2.342,2.129l2.981,0.214l1.276-1.064l1.065,0.214l3.188,2.549l-3.188-2.336l2.769,2.129l1.812,2.353l-1.383-2.138l1.062,0.851l1.277,2.769l-0.564-0.873l1.631,4.281l-0.213,1.064l-1.063,1.064l0.851,1.276l-0.426,0.64l1.703,2.342l2.477,3.302l0.08,0.319l1.277,1.064l2.547,0.182v-90.426H113.819z M172.887,189.499l0.213-1.065h-1.492l0.428-1.277l-7.028,1.49l-0.426,1.064l1.278,1.491l1.918-0.213l1.49-0.427l1.703,0.853l0.852-0.64l0.213-0.853h2.77l0.424-0.851l-1.49-0.639L172.887,189.499z";
 zonass[3] = "M278.516,129.443l-0.851-0.852l-0.606-2.546l-0.459-1.926l-0.639-0.852l-0.641,0.425l0.428-0.639l-0.854-0.426l0.641-0.639l-0.641-0.639l0.854-0.426l-0.641-0.639v-0.639l1.064,1.277l-0.638-1.917l-0.214,0.64l0.427-1.704l-0.42-0.279l0.207-1.851h-0.427l0.853-3.407h-0.426l-0.427-0.852l-0.428,1.277l0.215-1.064h-0.639l0.424-0.426l-0.851-0.639v-1.278l0.638-0.639l-1.277,0.426l1.066-0.426l-0.214-1.065l-2.343-0.639l0.64-0.426l-1.278-1.491l0.213-0.852l-0.639-0.426l-0.213,0.426l0.213-0.639l-1.277-0.64v0.213l-1.064-1.065l-1.064-2.769l-0.853-0.212l0.213-0.852l-0.426,0.639V98.35l-0.64-0.213l0.426,0.852l-0.852-0.426v0.426l-0.853-0.426v0.426l-2.769-3.833l-0.64,0.852l-0.851-1.277l0.424-0.213l-0.639-1.278l0.426-0.425l-0.639-2.342h0.428l0.211-1.705l-0.426-1.064v0.639l-0.426-0.213l-0.427-0.852l0.64,0.213l0.213-0.213l-0.64-1.065v0.852l-0.213-0.852l-0.426-0.212l-0.212,0.639l0.638,1.065l-0.426-0.213l0.426,1.065l-2.979-2.13l-1.066-1.704l-0.211,0.426l-0.641,1.064l0.641,1.491l0.425,0.852l-0.425-0.426l-1.279-1.49l-1.277,1.49l0.641-1.49h-0.854l0.426-0.213l-0.213-0.425l-0.851,0.212l0.851-0.426l-1.276-2.981l0.427-2.342l-0.214,0.425l-0.853-0.852l-0.213,0.427v-1.917l-0.852,0.425l0.213-0.639h-0.213l0.424-1.065l-0.851-0.852l-0.64,0.426l0.213-0.852h-1.49l-0.213-0.639l0.426-0.213l-1.062-0.639l0.211-0.426l-0.639-0.639l0.639-0.213l-0.425-0.426l0.638,0.213l0.213-0.426l1.065,0.852l-1.278-2.13l-0.424,0.213v-0.639h-0.641l-0.213-0.852h-0.854v0.852l-0.639-0.213l-0.854-0.852l0.215-0.213v-0.213l-1.064-0.639l-1.277,0.213l-0.426-1.492h-0.64l0.426,1.065l-0.853-0.213l-1.277-1.277l0.854,0.425l-1.279-2.768v0.852l-1.916,0.212l-0.852-1.916l-0.213,0.852h-0.641l-0.639-0.852l-2.129-0.853l-1.277-1.49l0.425-2.342h-0.853l-1.489-2.556l1.063-3.62h-0.427v-1.704l-1.276-2.343l0.426-1.064l-1.065,0.212l-2.554-3.407v-1.065h0.426v-1.49l-0.854-1.065l-0.213-2.342l-0.852-0.852l1.064-1.278v-0.213l-0.641,0.213l-0.211-1.065l0.852-1.064h-0.428l-0.424-0.852l-1.279-0.213l-0.852-1.278l-1.49-0.425l-1.064-2.769l-1.277,1.065l-0.854-0.426l-0.424,1.278l-1.279,0.639l-1.063-0.852l-0.64-2.769l-1.064-1.704l0.428-2.13l-0.641-2.129l0.213-1.917l-1.277,0.426l0.639-1.916l-1.277-0.852v-0.852l-1.062-0.213l-0.215-1.491l1.277-1.064l-1.062-0.427l-0.854,0.213l-0.638-0.639V9.97l-0.854-2.556h-0.64l-0.424-0.852v0.426l-0.854,0.425l1.066-1.704l-0.213-0.213l-0.214-0.212l-0.853,0.212l-0.639,1.278L202.055,7.2l0.215,1.065l-0.64,2.769h-0.213l-0.213,1.49h0.638l-0.852,0.213l-0.213,1.278l0.427,0.639l0.426-0.427l-0.426,0.64l-0.427-0.213l-0.213,0.852l-0.213-1.49l-1.064,1.704l0.64,0.213h-0.64l-0.854,2.129h0.641l-0.213-0.852l0.639,0.213l-0.426,0.213l0.853,0.639h1.064l-1.064,0.426l1.064,0.426l-0.427,0.213l0.213,1.064l-0.852-1.491l-0.427,1.065l-1.065,0.852l0.641,1.917l-0.213,0.639l0.426-0.213l-0.213,0.213l0.426,0.213h-0.854l-1.062,3.194l1.062,2.343l-0.638,2.129l0.853,3.833l-1.277,3.407l-0.641,2.555l0.427,1.065l-1.49,4.259l-1.703,2.13l-0.427,2.769l-1.917,1.491l-3.62,0.852l-0.427-0.213l-1.277-0.852l-1.489-0.213l-0.854-1.064l-1.49-0.639l-0.427-1.916l-0.851-0.852l-2.769-0.853l-3.409-0.425l-1.822-2.43v73.182h20.771v16.982l0.002-0.043l53.113,0.052l0.869-0.449l-0.053-0.543l0.722-0.072l0.073-1.102l1.104,0.073l0.796-1.173l0.541-0.053l1.321,0.416l1.3,0.237l1.41-0.504l0.903-0.089l0.235,0.524l0.722-0.071l0.761,0.29l0.577,0.309l1.643,0.021l1.121,0.254l0.631,0.85l0.415,0.507l0.435,0.688l0.069,0.723l0.47,1.049l0.688-0.433l0.309-0.578l0.651-0.795l0.651-0.794l0.433,0.688l0.757,0.291l1.049-0.47l0.129-0.559l0.651-0.795l-0.722,0.073l-0.288-1.068l0.108-0.741l0.904-0.09l1.083-0.106l0.67-0.614l0.851-0.631l0.938,0.272l0.813,0.833l1.049-0.468l0.939,0.271l0.541-0.053l0.526-0.234l0.506-0.415l0.92,0.092l0.975-0.091l-0.183,1.97L278.516,129.443zM274.258,109.85l0.852,1.491l1.916-5.751l-0.426-0.852v-1.49l-1.063,0.852l0.85,1.278l-1.704,1.917h0.428l-0.428,1.49L274.258,109.85z";
             
-/*
+
 window.onload = function()
 {
     pagina_cargada = true; 
-}*/
+}
 
 function setUbicacion(x,y) //RECORDAR QUE SON 2 UBICACIONES, LA DEL USUARIO Y LA QUE DESEA RECORDAR
 {
@@ -52,15 +52,15 @@ function recordar_ubi() // funcion que se activa con el boton de georeferencia
    
 }
 
-function rapha()
-{/*
-	if (!pagina_cargada) //if de rigor, para comprobar que no se dibuja cuando quiere la cosa, y que no dibuja cualquier cosa
+function rapha(draw)
+{
+    if (!pagina_cargada) //if de rigor, para comprobar que no se dibuja cuando quiere la cosa, y que no dibuja cualquier cosa
     {
         return 0;
     }
     
     var caminos = draw.caminos;
-    var zonass = draw.regiones;*/
+    var zonass = draw.regiones;
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	var inDetails = false;
 	var container = $("#wrap");
@@ -74,18 +74,13 @@ function rapha()
     var altoimg=foto.height;
     var caja = Raphael('wrap',anchoimg ,altoimg);
     //var botones_mapa = Raphael('wrap', '5%', '20%');
-    var panZoom = caja.panzoom({ initialZoom: 3, initialPosition: { x: 0, y: 0} });
+    var panZoom = caja.panzoom({ initialZoom: 0, initialPosition: { x: 120, y: 70} });
 	var isHandling = false;
 
 	panZoom.enable();
     caja.safari();
 
 
-/*
-    var svg = document.querySelector("svg");
-    svg.removeAttribute("width");
-    svg.removeAttribute("height");
-*/
     var cuadro = caja.rect(0, 0, anchoimg, altoimg).attr({stroke: "black","stroke-width": 1.5});
     
 
@@ -145,106 +140,6 @@ function rapha()
         }
     }
 
-    /////
-    /*
-	var viewBoxWidth = anchoimg;
-	var viewBoxHeight = altoimg;
-	var canvasID = "#wrap";
-	var startX,startY;
-	var mousedown = false;
-	var dX,dY;
-	var oX = 1, oY = 1, oWidth = viewBoxWidth, oHeight = viewBoxHeight;
-	var viewBox = caja.setViewBox(oX, oY, viewBoxWidth, viewBoxHeight, true);
-	viewBox.X = oX;
-	viewBox.Y = oY;
-	//var vB = paper.rect(viewBox.X,viewBox.Y,viewBoxWidth,viewBoxHeight)
-	    //.attr({stroke: "#009", "stroke-width": 9});;
-
-
-    /** This is high-level function.
-     * It must react to delta being more/less than zero.
-     */
-     /*
-    function handle(delta) { //esto maneja directamente el zoom
-        vBHo = viewBoxHeight;
-        vBWo = viewBoxWidth;
-        if (delta < 0) {
-        viewBoxWidth *= 0.95;
-        viewBoxHeight*= 0.95;
-        }
-        else {
-        viewBoxWidth *= 1.05;
-        viewBoxHeight *= 1.05;
-        }
-                        
-		viewBox.X -= (viewBoxWidth - vBWo) / 2;
-		viewBox.Y -= (viewBoxHeight - vBHo) / 2;          
-		caja.setViewBox(viewBox.X,viewBox.Y,viewBoxWidth,viewBoxHeight, true);
-    }
-
-
-//ESTO PODRIA FUNCIONAR PARA HACER EL DRAG
-/*
-        $(canvasID).mousedown(function(e){
-            
-            if (caja.getElementByPoint( e.pageX, e.pageY ) != null) {return;}
-            mousedown = true;
-            startX = e.pageX; 
-            startY = e.pageY;    
-        });
-
-        $(canvasID).mousemove(function(e){
-            if (mousedown == false) {return;}
-            dX = startX - e.pageX;
-            dY = startY - e.pageY;
-            
-            
-            caja.setViewBox(viewBox.X + dX, viewBox.Y + dY, viewBoxWidth, viewBoxHeight);
-
-        })
-            
-        $(canvasID).mouseup(function(e){
-            if ( mousedown == false ) return; 
-            viewBox.X += dX; 
-            viewBox.Y += dY; 
-            mousedown = false; 
-            
-        });*/
-
-    /************************************ Configuracion de los botones de zoom in, nivel y zoom out ************************************************/
-  
-    camb_niv_izq = caja.path("M 40 60, L 10 60, L 40 42.68, Z").attr({"title": "Bajar Nivel",'opacity': 1, fill: "black", "stroke-width": 1.5});
-    camb_niv_der = caja.path("M 60 60, L 90 60, L 60 42.68, Z").attr({"title": "Subir Nivel",'opacity': 1, fill: "black", "stroke-width": 1.5});
-    niv = caja.circle(40, 40, 10).attr({fill: "black", "stroke-width": 1.5, "title": "Nivel Actual"});
-    
-    niv.translate(anchoimg/2 -40,altoimg-70);
-    camb_niv_der.translate(anchoimg/2 - 20,altoimg-80);
-    camb_niv_izq.translate(anchoimg/2 - 80,altoimg-80);
-    //zoom_out.translate(1,41);
-    //zoom_in.translate(1,1);
-
-    //zoom_in.toFront;
-    //zoom_out.toFront;
-	/*************************************** Control de zoom **************************************************************/
-	/*var control_zoom = 0;
-
-	zoom_out.click(function(e) 
-	{
-		if(control_zoom >0) // asi no alejamos hasta el infinito el zoom descontroladamente
-		{
-			control_zoom --;
-			handle(1);
-
-		}
-	});
-
-	zoom_in.click(function(e)// recordar hacer un translate de los botones, sino, se pierden
-	{
-		control_zoom ++;
-
-		handle(-1);
-	});*/
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     var bath = caja.set();
     var fath = caja.set();
@@ -298,22 +193,30 @@ function rapha()
 
     cuadro.click(function(e) // esta funcion muesta un circulo verde de acuerdo a la posicion donde se haga click
     {
-        if(semaforo_rec_ubi)
+    	var IE = document.all?true:false, x, y;
+        if (IE) {
+        x = e.clientX + document.body.scrollLeft +
+          document.documentElement.scrollLeft;
+        y = e.clientY + document.body.scrollTop +
+           document.documentElement.scrollTop;
+        }          
+        else {
+               x = e.pageX;
+               y = e.pageY;
+        } 
+                //actualiza la posición del cursor del mouse  
+        cursorM_X = x - document.getElementById("wrap").offsetLeft;
+        cursorM_Y = y - document.getElementById("wrap").offsetTop;
+        if(!flag)
         {
-            var x=e.clientX -document.getElementById("wrap").offsetLeft
-            var y=e.clientY -document.getElementById("wrap").offsetTop;
-            if(!flag)
-            {
-                posicion.remove();
-                flag=true;
-            }
+            posicion.remove();
+            flag=true;
+        }
 
-            if(flag)
-            {
-                posicion = caja.circle(x,y,5).attr({fill: "green"});
-                flag = false;
-            }
-            setUbicacion(x,y);
+        if(flag)
+        {
+            posicion = caja.circle(cursorM_X,cursorM_Y,5).attr({fill: "blue"});
+            flag = false;
         }
 
     });
@@ -338,12 +241,12 @@ function rapha()
     }
 
 
-    cuadro.attr({fill: 'url('+foto.src +')'});
+
     //caja.image(foto.src, 0, 0, '100%', '100%');
     caja.setViewBox(0,0,anchoimg,altoimg, true); 
     mostrar_zonas(zonass);
     mostrar_caminos(caminos);
-
+    cuadro.attr({fill: 'url('+foto.src +')'});
 }
 
 function obtener_geo() // funcion que se activa con el boton de georeferencia
@@ -389,12 +292,9 @@ function mostrar(posicion) //esta funcion obtiene la geolocalizacón, esta sacad
     posicionLatitud=((ejeX)/(10.02320000002419/661)-12)+"px"; //Conversion entre segundos y pixeles de la imagen
     posicionLongitud=((ejeY)/(9.3328/602)-40)+"px";
 
-    /*
-    icono.style.left=posicionLatitud; //cambiar posicion segun nuevas coordenadas
-    icono.style.top=posicionLongitud; */
 }
-
+/*
 window.onload = function()
 {
     rapha(); 
-}
+}*/
