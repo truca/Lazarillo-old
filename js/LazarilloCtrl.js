@@ -57,9 +57,9 @@ function LazarilloCtrl($scope){
 	}
 
 	$scope.draw = function(){
-		$("#wrap").html("");
 		draw = {};
 		draw.regiones = data.svg.pisos[$scope.pisoActual]["regiones"]; 
+		$("#wrap").html("");
 		draw.caminos = [];//data.svg.pisos[$scope.pisoActual]["caminos"];
 		if($scope.trayectoria.length > 0)
 			draw.ruta = ruta_a_posiciones(ruta_al_siguiente($scope.ruta[0], $scope.trayectoria));
