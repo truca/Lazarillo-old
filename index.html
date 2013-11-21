@@ -14,18 +14,19 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
     <script type="text/javascript" src="js/only.js"></script>
-  </head>
-  <body style="" ng-controller="LazarilloCtrl">
-    <div id="mapa" class="screen"> 
-      <div id="wrap" class="wrap"></div>
 
+  </head>
+  <body ng-controller="LazarilloCtrl">
+    <div id="mapContainer" class="screen"> 
+      <div id="wrap" class="wrap"></div>
+      <div id="mapControls"><a id="up" href="javascript:;"></a><a id="down" href="javascript:;"></a></div>
       <div class="footer">
         <div class="container">
           <div id="menu" class="btn-group col-xs-12 col-sm-12 col-md-12">
             <button class="btn btn-footer-25 btn-primary" ng-click="toggleRuta()">
               <span class="glyphicon glyphicon-road"></span>
             </button>
-            <button class="btn btn-footer-25 btn-primary" ng-click="toggleRutas()">
+            <button class="btn btn-footer-25 btn-primary">
               <span class="glyphicon glyphicon-globe"></span>
             </button>
             <button class="btn btn-footer-25 btn-primary" onclick="recordar_ubi()">L</button>
@@ -37,25 +38,25 @@
       </div>
     </div>
     <div id="pi" class="screen inv">
-      <div class="wrap2">
-        <input class="col-xs-11 col-sm-11 col-md-11" type="text" ng-model="categorySearch">
-        <button class="btn btn-primary col-xs-1 col-sm-1 col-md-1">Buscar</button>
+      <div class="wrap">
+
         <div>
-          <div ng-repeat="categoria in categorias | filter:categorySearch:strict">
-            <h3>{{categoria}}</h3>
-            <hr width="70%" align="left">
-            <table style="text-align: center;" class="col-xs-12 col-sm-12 col-md-12 table table-bordered table-striped" class="tabla_tiendas">
-              <tr ng-repeat="tienda in tiendas | filter: {agregada: 'false'}" >
-                <td class="col-xs-4 col-sm-4 col-md-4 tienda-{{tienda.seleccionada}}"><input type="checkbox" ng-change="setPosition(tienda, tienda.seleccionada)" ng-model="tienda.seleccionada" value="{{tienda.id}}"></td>
-                <td class="col-xs-4 col-sm-4 col-md-4 tienda-{{tienda.seleccionada}}">{{tienda.nombre}}</td>
-                <td class="col-xs-4 col-sm-4 col-md-4 tienda-{{tienda.seleccionada}}">{{tienda.categorias}}</td>
-              </tr>
+          <table style="text-align: center;" class="col-xs-12 col-sm-12 col-md-12 table table-bordered table-striped" id="tabla_tiendas">
+                <tr>
+                  <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Seleccion</th>
+                  <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Nombre</th>
+                  <th style="text-align: center;" class="col-xs-4 col-sm-4 col-md-4">Categorias</th>
+                </tr>
+                <tr ng-repeat="tienda in tiendas | filter: {agregada: 'false'}">
+                  <td class="tienda-{{tienda.seleccionada}}"><input type="checkbox" ng-change="setPosition(tienda, tienda.seleccionada)" ng-model="tienda.seleccionada" value="{{tienda.id}}"></td>
+                  <td class="tienda-{{tienda.seleccionada}}">{{tienda.nombre}}</td>
+                  <td class="tienda-{{tienda.seleccionada}}">{{tienda.categorias}}</td>
+                </tr>
             </table>
-          </div>  
         </div>
       </div>
 
-      <div class="footer sticky-footer">
+      <div class="footer">
         <div class="container">
           <div id="menu" class="btn-group col-xs-12 col-sm-12 col-md-12">
             <button class="btn btn-footer-50 btn-primary" ng-click="toggleRuta()">
@@ -106,6 +107,6 @@
   <script type="text/javascript" src="js/data.js"></script>
   <script type="text/javascript" src="js/underscore-min.js"></script>
   <script type="text/javascript" charset="utf-8" src="js/mapa.js"></script>
-  <script type="text/javascript" src="js/scriptcaminos.js"></script>
+  <script type="text/javascript" src="js/raphael.pan-zoom.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
 </html>

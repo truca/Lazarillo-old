@@ -1,4 +1,0 @@
-Terminar el Zoom, trasladando bien los botones
-
-Hacer el drag, que se habilite cuando el Zoom este
-siendo Usado

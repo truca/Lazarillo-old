@@ -1,12 +1,4 @@
-Ver Mapa
+Terminar el Zoom, trasladando bien los botones
 
-hacer zoom
-cambiar piso
-
-Geolocalizar
-encontrar posicion
-activar/desactivar geolocalizacion
-trazar ruta desde posicion
-
-cambiar idioma 
-recordar ubicacion
+Hacer el drag, que se habilite cuando el Zoom este
+siendo Usado

@@ -1,6 +1,4 @@
-    data = new Object();
-    data.posicion = [500, 450];
-    data.estacionamiento = [400, 300];
+data = new Object();
     data.nombre_recinto = "Universidad1";
     data.piso_actual = "0";
     data.pisos = [];
@@ -9,7 +7,6 @@
     data.nodos["posicion"] = [];
     //agregar variable al final de adyacencia, booleano de si es es PT
     data.nodos["adyacencia"] = [];
-    data.nodos["PT"] = [];
     data.svg = new Object();
     data.svg.pisos = [];
     data.ready = false;
@@ -33,37 +30,31 @@
         else data.geolocalizar = true;
     }
         
-    var reg = [];
     function get_pisos(){
         var pisos = {}, regiones=[], caminos=[];
         //conseguir los pisos asociados a el recinto
         
         $.post( "php/niveles_recinto.php", { recinto: data.nombre_recinto }, function(floor){
-            
             pisos = JSON.parse(floor);
 
-            $.post( "php/regiones_nivel_2.php", { recinto: data.nombre_recinto }, function(figure){
-                regiones = JSON.parse(figure)
-                
-                regiones = _.groupBy(regiones, function(region){ 
-                    return region.NroNivel; 
-                });
-
-                for(region in regiones)
-
-                aux = [];
-
-
-                _.each(regiones, function(region){
-                    piso = {nivel: region[0]["NroNivel"], regiones: []} 
-                    _.each(region, function(reg){
-                        piso.regiones.push(reg.Region);
+            for(index = 0; index < pisos.length; index++){
+                piso = pisos[index]["NroNivel"];
+                $.post( "php/regiones_nivel.php", { recinto: data.nombre_recinto, nivel: piso }, function(figure){
+                    regiones = JSON.parse(figure);
+                    $.post( "php/caminos_nivel.php", { recinto: data.nombre_recinto, nivel: piso }, function(path){
+                        caminos = JSON.parse(path);
+                        var reg = [], cam = [];
+                        for(index_reg in regiones){
+                            reg.push(regiones[index_reg]["Region"]);
+                        }
+                        for(index_cam in caminos){
+                            cam.push(caminos[index_cam]["StringPath"]);
+                        }
+                        data.svg.pisos.push({"nivel": piso,"regiones": reg,"caminos": cam});
+                        //data.svg.pisos[piso.toString()] = {"regiones": reg,"caminos": cam};
                     });
-                    aux.push(piso);
                 });
-                data.svg.pisos = aux;
-            });
-
+            }  
             data.pisos = pisos;
         });
     }
@@ -77,7 +68,7 @@
     }
 
     function agregar_nodo(id_nodo){
-        data.nodos["adyacencia"].push([parseInt(id_nodo),[]]);
+        data.nodos["adyacencia"].push([id_nodo,[]])
     }
 
     function agregar(id_nodo, camino){
@@ -96,7 +87,7 @@
             agregar_nodo(nodo_b);
         
         //buscar tipo de adyacencia
-        agregar(nodo_a, [parseInt(nodo_b), parseFloat(adyacencia["PesoCamino"])]);
+        agregar(nodo_a, [nodo_b, adyacencia["PesoCamino"]]);
     }
 
     function get_adyacentes(){
@@ -125,24 +116,23 @@
             tiendas = JSON.parse(info);
 
             for(index in tiendas){
-                data.nodos["etiquetas"].push({"id":tiendas[index]["IdNodo"], "nombre": tiendas[index]["Nombre"], "categorias": tiendas[index]["Etiquetas"].split(", "), "seleccionada": false, "agregada": false});
+                data.nodos["etiquetas"].push({"id":tiendas[index]["IdNodo"], "nombre": tiendas[index]["Nombre"], "categorias": tiendas[index]["Etiquetas"], "seleccionada": false, "agregada": false});
             }
         });
     }
 
-    function ruta_a_posiciones(ruta){
-        return _.map(ruta, function(punto){
-            return posicion_desde_(punto);
-        });
+    function get_data(nombreRecinto){
+        data.nombre_recinto = nombreRecinto;
+        get_pisos();   
+        get_etiquetas();
+        get_posiciones();
+        get_puntos_transicion();
+        get_adyacentes();
+        data.ready = true;
     }
 
-    function posicion_desde_(punto){
-        if(_.find(data.nodos.posicion, function(pos){return pos[0] == punto;}) != undefined)
-            return _.find(data.nodos.posicion, function(pos){return pos[0] == punto;})[1];
-        else if(punto == -1)
-            return data.posicion;
-        else if(punto == -2)
-            return data.estacionamiento;
-        else
-            return;
-    }
+    
+
+    $(function(){
+        get_data("Universidad1");
+    });

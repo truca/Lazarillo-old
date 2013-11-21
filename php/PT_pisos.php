@@ -3,7 +3,7 @@
 	mysql_select_db("tractorv_lazarillo", $con) or die(mysql_error());
 	mysql_query("SET NAMES 'utf8'");
 
-	$sql = "SELECT IdNodo, NroNivel FROM Nodos WHERE TipoPT !=  '' AND Recinto =  'Universidad1'";
+	$sql = "SELECT IdNodo, NroNivel FROM Nodos WHERE TipoPT !=  '' AND Recinto =  'Universidad1'";// ".$_POST["recintos"]."
 
 	$q = mysql_query( $sql ) or die(mysql_error());
 
