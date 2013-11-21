@@ -3,7 +3,7 @@
 	mysql_select_db("tractorv_lazarillo", $con) or die(mysql_error());
 	mysql_query("SET NAMES 'utf8'");
 
-	$sql = "SELECT IdNodo, Region, NroNivel FROM Nodos WHERE TipoPI !=  '' AND Region !=  '@' AND Recinto =  '".$_POST["recinto"]."' ORDER BY NroNivel";
+	$sql = "select Region from Nodos where Recinto = 'Universidad Federico Santa María, Sede San Joaquín' and TipoPI != '' and IdNivel in (select IdNivel from Nivel where NombreRecinto = 'Universidad Federico Santa María, Sede San Joaquín' and NroNivel = 1)";
 
 	$q = mysql_query( $sql ) or die(mysql_error());
 	
