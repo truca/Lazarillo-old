@@ -2,12 +2,18 @@
 var pagina_cargada = false; // variable que sirve para el duende para que vea cuando la pagina se cargo
 var flag = true; // variable que controla la aparicion de los puntitos de ubicacion manual
 var semaforo_geo = true; // variable que activa la geolocalizacion
+<<<<<<< HEAD
 var semaforo_rec_ubi = false; // variable para activar el recordar ubicacion
 var geo=document.getElementById("geolocalizacion");
+=======
+var semaforo_rec_ubi = true; // variable para activar el recordar ubicacion
+var x=document.getElementById("geolocalizacion");
+>>>>>>> 865b3b58b13af30354afa7f87857c1cfa60870fe
 var ubicacion = new Array(); // arreglo que sirve para guardar la ubicacion manual dejada
 ubicacion[0] = false;
 ubicacion[1] = false;
 
+<<<<<<< HEAD
 // australia, con el fin de poder sincrinizar los drags
 var caminos = new Array();
 var zonass = new Array();
@@ -21,6 +27,8 @@ zonass[1]= "M166.71,26.155v0.639h-0.851l-0.213-0.852l0.213-0.425l-1.066,0.212l0.
 zonass[2] = "M113.819,117.351v38.96l0.502-0.251l6.602-0.641l1.064-0.212l4.26,0.426l2.343-1.276l4.046,2.129l2.981,2.342h1.917l-0.213-0.426l0.426-0.213h1.491l2.555,2.131h2.556l-0.64-0.64l0.426-0.214l0.427,0.426l0.426-0.639l2.341,2.343l-0.638,0.214v1.063l1.276-0.64l0.853,0.213l0.853,1.703l-0.64,0.854l0.213-0.639h-1.062l0.424,0.852l-0.424,0.641l0.851,0.211l-0.427,0.641l1.278,1.277l-0.426-1.277l0.64,1.277l0.639-0.426l1.277,0.853l-0.64-0.64l1.063,0.213l-0.424,0.427l1.276,1.702v1.277l2.344,2.131l1.277,5.75l0.213-0.64l0.213,0.64l0.425,0.213l-0.851,0.213l-0.427-0.853l0.213-0.213l-0.854-0.214v-0.425l-0.638,1.276l0.851-0.426l2.558,3.194l1.063-0.64l1.065,1.278l0.425-2.344l-1.49,0.64l0.641-0.427l0.213-1.703l0.851-0.427l0.427,0.427v-1.489l3.194-3.621l2.556-1.277l-0.64,0.213l0.427-0.852l0.428,0.424l1.49-0.424l1.489-4.261l1.277-1.491l0.853,0.428v-4.26l1.064,2.342l0.213,1.918l0.64,0.639l-1.704,1.49l1.277,2.343l-2.557,2.556l-0.637,1.918l-0.428,0.213l0.428,1.276l-0.641,1.278l0.426-0.213l0.215,1.277l-0.428,2.556l-0.427,0.426l-2.554-0.64l-1.066,3.194l2.13-0.214l1.704-1.275l1.49,0.638l0.853-0.425l-0.426-0.428l1.063-2.342l0.213-2.13l1.279-2.981l3.193,5.537l-0.428,0.213l-0.213-0.639l-0.213,4.686l-2.342,2.129l2.981,0.214l1.276-1.064l1.065,0.214l3.188,2.549l-3.188-2.336l2.769,2.129l1.812,2.353l-1.383-2.138l1.062,0.851l1.277,2.769l-0.564-0.873l1.631,4.281l-0.213,1.064l-1.063,1.064l0.851,1.276l-0.426,0.64l1.703,2.342l2.477,3.302l0.08,0.319l1.277,1.064l2.547,0.182v-90.426H113.819z M172.887,189.499l0.213-1.065h-1.492l0.428-1.277l-7.028,1.49l-0.426,1.064l1.278,1.491l1.918-0.213l1.49-0.427l1.703,0.853l0.852-0.64l0.213-0.853h2.77l0.424-0.851l-1.49-0.639L172.887,189.499z";
 zonass[3] = "M278.516,129.443l-0.851-0.852l-0.606-2.546l-0.459-1.926l-0.639-0.852l-0.641,0.425l0.428-0.639l-0.854-0.426l0.641-0.639l-0.641-0.639l0.854-0.426l-0.641-0.639v-0.639l1.064,1.277l-0.638-1.917l-0.214,0.64l0.427-1.704l-0.42-0.279l0.207-1.851h-0.427l0.853-3.407h-0.426l-0.427-0.852l-0.428,1.277l0.215-1.064h-0.639l0.424-0.426l-0.851-0.639v-1.278l0.638-0.639l-1.277,0.426l1.066-0.426l-0.214-1.065l-2.343-0.639l0.64-0.426l-1.278-1.491l0.213-0.852l-0.639-0.426l-0.213,0.426l0.213-0.639l-1.277-0.64v0.213l-1.064-1.065l-1.064-2.769l-0.853-0.212l0.213-0.852l-0.426,0.639V98.35l-0.64-0.213l0.426,0.852l-0.852-0.426v0.426l-0.853-0.426v0.426l-2.769-3.833l-0.64,0.852l-0.851-1.277l0.424-0.213l-0.639-1.278l0.426-0.425l-0.639-2.342h0.428l0.211-1.705l-0.426-1.064v0.639l-0.426-0.213l-0.427-0.852l0.64,0.213l0.213-0.213l-0.64-1.065v0.852l-0.213-0.852l-0.426-0.212l-0.212,0.639l0.638,1.065l-0.426-0.213l0.426,1.065l-2.979-2.13l-1.066-1.704l-0.211,0.426l-0.641,1.064l0.641,1.491l0.425,0.852l-0.425-0.426l-1.279-1.49l-1.277,1.49l0.641-1.49h-0.854l0.426-0.213l-0.213-0.425l-0.851,0.212l0.851-0.426l-1.276-2.981l0.427-2.342l-0.214,0.425l-0.853-0.852l-0.213,0.427v-1.917l-0.852,0.425l0.213-0.639h-0.213l0.424-1.065l-0.851-0.852l-0.64,0.426l0.213-0.852h-1.49l-0.213-0.639l0.426-0.213l-1.062-0.639l0.211-0.426l-0.639-0.639l0.639-0.213l-0.425-0.426l0.638,0.213l0.213-0.426l1.065,0.852l-1.278-2.13l-0.424,0.213v-0.639h-0.641l-0.213-0.852h-0.854v0.852l-0.639-0.213l-0.854-0.852l0.215-0.213v-0.213l-1.064-0.639l-1.277,0.213l-0.426-1.492h-0.64l0.426,1.065l-0.853-0.213l-1.277-1.277l0.854,0.425l-1.279-2.768v0.852l-1.916,0.212l-0.852-1.916l-0.213,0.852h-0.641l-0.639-0.852l-2.129-0.853l-1.277-1.49l0.425-2.342h-0.853l-1.489-2.556l1.063-3.62h-0.427v-1.704l-1.276-2.343l0.426-1.064l-1.065,0.212l-2.554-3.407v-1.065h0.426v-1.49l-0.854-1.065l-0.213-2.342l-0.852-0.852l1.064-1.278v-0.213l-0.641,0.213l-0.211-1.065l0.852-1.064h-0.428l-0.424-0.852l-1.279-0.213l-0.852-1.278l-1.49-0.425l-1.064-2.769l-1.277,1.065l-0.854-0.426l-0.424,1.278l-1.279,0.639l-1.063-0.852l-0.64-2.769l-1.064-1.704l0.428-2.13l-0.641-2.129l0.213-1.917l-1.277,0.426l0.639-1.916l-1.277-0.852v-0.852l-1.062-0.213l-0.215-1.491l1.277-1.064l-1.062-0.427l-0.854,0.213l-0.638-0.639V9.97l-0.854-2.556h-0.64l-0.424-0.852v0.426l-0.854,0.425l1.066-1.704l-0.213-0.213l-0.214-0.212l-0.853,0.212l-0.639,1.278L202.055,7.2l0.215,1.065l-0.64,2.769h-0.213l-0.213,1.49h0.638l-0.852,0.213l-0.213,1.278l0.427,0.639l0.426-0.427l-0.426,0.64l-0.427-0.213l-0.213,0.852l-0.213-1.49l-1.064,1.704l0.64,0.213h-0.64l-0.854,2.129h0.641l-0.213-0.852l0.639,0.213l-0.426,0.213l0.853,0.639h1.064l-1.064,0.426l1.064,0.426l-0.427,0.213l0.213,1.064l-0.852-1.491l-0.427,1.065l-1.065,0.852l0.641,1.917l-0.213,0.639l0.426-0.213l-0.213,0.213l0.426,0.213h-0.854l-1.062,3.194l1.062,2.343l-0.638,2.129l0.853,3.833l-1.277,3.407l-0.641,2.555l0.427,1.065l-1.49,4.259l-1.703,2.13l-0.427,2.769l-1.917,1.491l-3.62,0.852l-0.427-0.213l-1.277-0.852l-1.489-0.213l-0.854-1.064l-1.49-0.639l-0.427-1.916l-0.851-0.852l-2.769-0.853l-3.409-0.425l-1.822-2.43v73.182h20.771v16.982l0.002-0.043l53.113,0.052l0.869-0.449l-0.053-0.543l0.722-0.072l0.073-1.102l1.104,0.073l0.796-1.173l0.541-0.053l1.321,0.416l1.3,0.237l1.41-0.504l0.903-0.089l0.235,0.524l0.722-0.071l0.761,0.29l0.577,0.309l1.643,0.021l1.121,0.254l0.631,0.85l0.415,0.507l0.435,0.688l0.069,0.723l0.47,1.049l0.688-0.433l0.309-0.578l0.651-0.795l0.651-0.794l0.433,0.688l0.757,0.291l1.049-0.47l0.129-0.559l0.651-0.795l-0.722,0.073l-0.288-1.068l0.108-0.741l0.904-0.09l1.083-0.106l0.67-0.614l0.851-0.631l0.938,0.272l0.813,0.833l1.049-0.468l0.939,0.271l0.541-0.053l0.526-0.234l0.506-0.415l0.92,0.092l0.975-0.091l-0.183,1.97L278.516,129.443zM274.258,109.85l0.852,1.491l1.916-5.751l-0.426-0.852v-1.49l-1.063,0.852l0.85,1.278l-1.704,1.917h0.428l-0.428,1.49L274.258,109.85z";
             
+=======
+>>>>>>> 865b3b58b13af30354afa7f87857c1cfa60870fe
 
 window.onload = function()
 {
@@ -52,6 +60,7 @@ function recordar_ubi() // funcion que se activa con el boton de georeferencia
    
 }
 
+
 function rapha(draw)
 {
     if (!pagina_cargada) //if de rigor, para comprobar que no se dibuja cuando quiere la cosa, y que no dibuja cualquier cosa
@@ -61,9 +70,16 @@ function rapha(draw)
     
     var caminos = draw.caminos;
     var zonass = draw.regiones;
+<<<<<<< HEAD
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	var inDetails = false;
 	var container = $("#wrap");
+=======
+    
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        var inDetails = false;
+    var container = $("#wrap");
+>>>>>>> 865b3b58b13af30354afa7f87857c1cfa60870fe
     var ancho=$("#wrap").width();
     var alto= $("#wrap").height();
    
@@ -74,6 +90,7 @@ function rapha(draw)
     var altoimg=foto.height;
     var caja = Raphael('wrap',anchoimg ,altoimg);
     //var botones_mapa = Raphael('wrap', '5%', '20%');
+<<<<<<< HEAD
     var panZoom = caja.panzoom({ initialZoom: 0, initialPosition: { x: 120, y: 70} });
 	var isHandling = false;
 
@@ -82,8 +99,79 @@ function rapha(draw)
 
 
     var cuadro = caja.rect(0, 0, anchoimg, altoimg).attr({stroke: "black","stroke-width": 1.5});
+=======
+    var panZoom = caja.panzoom({ initialZoom: 3, initialPosition: { x: 0, y: 0} });
+    var isHandling = false;
+
+    panZoom.enable();
+    caja.safari();
+
+    var cuadro = caja.rect(0, 0, anchoimg, altoimg).attr({stroke: "black","stroke-width": 1.5});
+    
+    $("#mapContainer #up").click(function (e) { //zoom in 
+        panZoom.zoomIn(1);
+        e.preventDefault();
+    });
+
+    $("#mapContainer #down").click(function (e) { //zoom out
+        panZoom.zoomOut(1);
+        e.preventDefault();
+    });
+    
+    $("#others #moveTopLeft").click(function (e) {
+        panZoom.pan(1,1);
+    });
+
+     function handleDetails() { //ESTA FUNCION SIRVE PARA HACER CLICK, Y EL MUNDO SALDRA ADELANTE
+        if (panZoom.isDragging() || isHandling) return;
+        isHandling = true;
+        var anim, box = this.getBBox();
+
+        if (inDetails) {
+            inDetails = false;
+            panZoom.enable();
+            this.hover(animateOver, animateOut);
+            anim = overlay.animate({ 'fill-opacity': 0 }, 300, function () { this.toBack(); isHandling = false; });
+            this.animateWith(overlay, anim, {
+                transform: ""
+            }, 300);
+            this.attr("fill", this.data("fill"));
+        }
+        else {
+            inDetails = true;
+            panZoom.disable();
+            this.unhover(animateOver, animateOut);
+            overlay.toFront();
+            this.toFront();
+
+            var currPaperPosition = panZoom.getCurrentPosition();
+            var currPaperZoom = panZoom.getCurrentZoom();
+
+            var currHeight = r.height * (1 - currPaperZoom * 0.1);
+
+            var zoomDif = (currHeight / 2) / box.height;
+
+            var xdif = currPaperPosition.x - box.x + ((box.width * zoomDif) - box.width) / 2;
+            var ydif = (currPaperPosition.y + ((currHeight / 2) - (box.height / 2))) - box.y;
+
+
+            anim = overlay.animate({ 'fill-opacity': 0.7 }, 300, function () { isHandling = false; });
+            this.animateWith(overlay, anim, {
+                transform: "t" + xdif + "," + ydif + "s" + zoomDif
+            }, 300);
+        }
+    }
+
+   
+    /************************************ Configuracion de los botones de zoom in, nivel y zoom out ************************************************/
+  ///  CAMBIAR A DIV LOS BOTONES, ASI TODO QUEDA HERMOSO ////
+    camb_niv_izq = caja.path("M 40 60, L 10 60, L 40 42.68, Z").attr({"title": "Bajar Nivel",'opacity': 1, fill: "black", "stroke-width": 1.5});
+    camb_niv_der = caja.path("M 60 60, L 90 60, L 60 42.68, Z").attr({"title": "Subir Nivel",'opacity': 1, fill: "black", "stroke-width": 1.5});
+    niv = caja.circle(40, 40, 10).attr({fill: "black", "stroke-width": 1.5, "title": "Nivel Actual"});
+>>>>>>> 865b3b58b13af30354afa7f87857c1cfa60870fe
     
 
+<<<<<<< HEAD
     //aca, mediante el uso de la magia negra, se puede hacer el drag de la imagen de fondo
     ////
 	$("#mapContainer #up").click(function (e) { //zoom in 
@@ -141,6 +229,8 @@ function rapha(draw)
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+=======
+>>>>>>> 865b3b58b13af30354afa7f87857c1cfa60870fe
     var bath = caja.set();
     var fath = caja.set();
     var pos = caja.set();
@@ -184,7 +274,11 @@ function rapha(draw)
                  modo = "L"; // El primero es M, el resto son L.
             caminos.push([modo, arreglo[i][0], arreglo[i][1]]); // va agregando cada coordenada al path, cuando termine, tendrá el path de todo el camino
         }
+<<<<<<< HEAD
         ruta_optima = caja.path(caminos).attr({stroke: "black", "stroke-width": 5});
+=======
+        ruta_optima = caja.path(caminos).attr({stroke: "#c0cd29", "stroke-width": 9, 'fill-opacity': 0.5});
+>>>>>>> 865b3b58b13af30354afa7f87857c1cfa60870fe
         ruta_optima.click(function(){
         ruta_optima.remove(); // remueve todo
         });
@@ -241,12 +335,20 @@ function rapha(draw)
     }
 
 
+<<<<<<< HEAD
 
     //caja.image(foto.src, 0, 0, '100%', '100%');
     caja.setViewBox(0,0,anchoimg,altoimg, true); 
     mostrar_zonas(zonass);
     mostrar_caminos(caminos);
     cuadro.attr({fill: 'url('+foto.src +')'});
+=======
+    cuadro.attr({fill: 'url('+foto.src +')'});
+    caja.setViewBox(0,0,anchoimg,altoimg, true); 
+    mostrar_zonas(zonass);
+    mostrar_caminos(caminos);
+
+>>>>>>> 865b3b58b13af30354afa7f87857c1cfa60870fe
 }
 
 function obtener_geo() // funcion que se activa con el boton de georeferencia
@@ -266,6 +368,7 @@ function obtener_geo() // funcion que se activa con el boton de georeferencia
    
 }
 
+var x=document.getElementById("geolocalizacion");
 
 function fallo() //esta funcion se usa para decir que el browser no soporta la geolocalizacion 
 {
@@ -291,7 +394,13 @@ function mostrar(posicion) //esta funcion obtiene la geolocalizacón, esta sacad
 
     posicionLatitud=((ejeX)/(10.02320000002419/661)-12)+"px"; //Conversion entre segundos y pixeles de la imagen
     posicionLongitud=((ejeY)/(9.3328/602)-40)+"px";
+<<<<<<< HEAD
 
+=======
+/*
+    icono.style.left=posicionLatitud; //cambiar posicion segun nuevas coordenadas
+    icono.style.top=posicionLongitud; */
+>>>>>>> 865b3b58b13af30354afa7f87857c1cfa60870fe
 }
 /*
 window.onload = function()

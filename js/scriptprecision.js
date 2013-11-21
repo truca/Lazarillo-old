@@ -1,9 +1,12 @@
 //funcion que dados 2 puntos, devuelve su ecuacion de la recta mas sus limites
-function obtener_ec_recta(coord1,coord2)
+function obtener_ec_recta(punto1,punto2)
 {
 var ec_recta=new Array();//el array es de la forma [m,n,coord1,coor2]
 var m,n;
-
+var coord1=new Array();
+copiar_arreglo(coord1,punto1);
+var coord2=new Array();
+copiar_arreglo(coord2,punto2);
 //obtiene la pendiente
 m = ((coord2[1]-coord1[1])/(coord2[0]-coord1[0]));
 	//obtiene el coef de posicion
@@ -37,6 +40,7 @@ var cant_sub_ady;
 	{
 		cant_sub_ady=adyacentes[i][1].length;//guardamos el total de conexiones que tiene el adyacente actual 
 		copiar_arreglo(coord1,_.find(posiciones_prueba, function(pos){ return pos[0]== adyacentes[i][0]})[1]);//guardamos la posicion del actual en coord1
+		//console.log("rectas a generar:"+cant_sub_ady);
 		for(var j=0;j<cant_sub_ady;j++)//iteramos para cada adyacente
 		{
 		copiar_arreglo(coord2,_.find(posiciones_prueba, function(pos){ return pos[0]== adyacentes[i][1][j][0]})[1]);//guardamos la posicion del j-esimo adyacente
@@ -71,14 +75,19 @@ function proyeccion_punto_recta(punto, recta1)
 var recta_aux=[];//Se usa para guardar la pendiente y el coef de posición de la nueva recta que pasa por el punto y es perpendicular con la recta1
 var punto2=[];
 
-console.log("recta1: Pendiente:"+recta1[0]+", Coef. Pos:"+recta1[1]);
+//console.log("recta1: Pendiente:"+recta1[0]+", Coef. Pos:"+recta1[1]);
 recta_aux[0]=(-1)/recta1[0];
 recta_aux[1]=punto[1]+(punto[0]/recta1[0]);
 
 //Calculamos la interseccion de las rectas y lo guardamos en el punto2
 punto2[0]=(recta1[1]-recta_aux[1])/(recta_aux[0]-recta1[0]);
 punto2[1]=((recta1[1]*recta_aux[0])-(recta_aux[1]*recta1[0]))/(recta_aux[0]-recta1[0]);
-
+//console.log("Para el punto:");
+//console.log(punto);
+//console.log("Sobre la recta");
+//console.log(recta1);
+//console.log("La proyeccion es:");
+//console.log(punto2);
 return(punto2)
 }
 
@@ -109,14 +118,14 @@ var tam_posiciones=posiciones_radio.length;
 	for(var i=0;i<tam_rectas;i++)
 	{
 	coord=proyeccion_punto_recta(punto,rectas[i]);//guardamos la proyeccion del punto sobre la recta
-	console.log("si "+coord[0]+">="+rectas[i][2][0]+" && "+coord[0]+"<="+rectas[i][3][0]);
+	//console.log("si "+coord[0]+">="+rectas[i][2][0]+" && "+coord[0]+"<="+rectas[i][3][0]);
 	if(coord[0]>=rectas[i][2][0] && coord[0]<=rectas[i][3][0])//vemos si la proyeccion esta dentro de los limites de la recta
 		{
-		console.log("ENTRE IF coordenadas!!!");
+		//console.log("ENTRE IF coordenadas!!!");
 		distancia=distancia_punto_punto(punto,coord);//guardamos la distancia entre el punto y la proyeccion
 			if(distancia_minima>distancia)//si la distancia al punto es menor que la distancia minima anterior reemplaza la distancia minima y guarda la proyeccion
 			{
-			console.log("ENTRE IF DISTANCIA!!!");
+			//console.log("ENTRE IF DISTANCIA!!!");
 			distancia_minima=distancia;
 			coord_minimo[0]=coord[0];
 			coord_minimo[1]=coord[1];
