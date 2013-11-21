@@ -89,7 +89,7 @@ function rapha(draw)
     var caja = Raphael('wrap',anchoimg ,altoimg);
     //var botones_mapa = Raphael('wrap', '5%', '20%');
 
-    var panZoom = caja.panzoom({ initialZoom: 0, initialPosition: { x: 120, y: 70} });
+    var panZoom = caja.panzoom({ initialZoom: 3, initialPosition: { x: 120, y: 70} });
 	var isHandling = false;
 
 	panZoom.enable();

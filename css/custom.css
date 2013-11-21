@@ -85,11 +85,10 @@ svg {
   margin: 0 auto -60px;
   padding: 0 0 60px;
 }
-<<<<<<< HEAD
+
 #mapContainer #mapControls { position: absolute; left: 15px; top: 15px; width: 29px; }
 #mapContainer #mapControls #up { background: url(iconUp.png) no-repeat center top; display: block; height: 26px; width: 29px; }
 #mapContainer #mapControls #down { background: url(iconDown.png) no-repeat center top; display: block; height: 27px; width: 29px; }
-=======
 
 div > h3 {
   margin-top: 0;
@@ -125,4 +124,4 @@ svg {
 #mapContainer #mapControls { position: absolute; left: 15px; top: 15px; width: 29px; }
 #mapContainer #mapControls #up { background: url(iconUp.png) no-repeat center top; display: block; height: 26px; width: 29px; }
 #mapContainer #mapControls #down { background: url(iconDown.png) no-repeat center top; display: block; height: 27px; width: 29px; }
->>>>>>> 865b3b58b13af30354afa7f87857c1cfa60870fe
+
