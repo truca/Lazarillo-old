@@ -69,7 +69,7 @@ function rapha(draw)
     var alto= $("#wrap").height();
    
     var foto=new Image();
-    foto.src="http://www.tractorverde.cl/Upload/images/uni.png"; //recordar que tienes que obtener el mapa cuando se edita de esta forma, te tiene que llegar como parametro
+    foto.src=draw.imagen.src; //recordar que tienes que obtener el mapa cuando se edita de esta forma, te tiene que llegar como parametro
     
     var anchoimg=foto.width;
     var altoimg=foto.height;
@@ -306,6 +306,7 @@ function rapha(draw)
     caja.setViewBox(0,0,anchoimg,altoimg, true); 
     mostrar_zonas(zonass);
     mostrar_caminos(caminos);
+    dibujar_camino(draw.ruta,draw.x,draw.y);
     cuadro.attr({fill: 'url('+foto.src +')'});
 }
 
